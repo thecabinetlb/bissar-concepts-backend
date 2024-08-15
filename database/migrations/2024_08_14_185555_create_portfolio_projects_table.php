@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('portfolio_projects', function (Blueprint $table) {
             $table->id();
+            $table->string('banner')->nullable();
             $table->string('thumbnail')->nullable();
             $table->json('images')->nullable();
             $table->string('title');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->year('year')->nullable();
             $table->json('architects')->nullable();
             $table->string('client')->nullable();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('completion_date')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();

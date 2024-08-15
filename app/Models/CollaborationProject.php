@@ -17,7 +17,8 @@ class CollaborationProject extends Model
         'client',
         'images',
         'thumbnail',
-        'created_at',
+        'banner',
+        'completion_date',
         'category_id',
         'type_id'
     ];
