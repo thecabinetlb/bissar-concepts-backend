@@ -1,7 +1,51 @@
 <?php
 
 return [
+    'dark_mode' => true,
+        /*
+    |--------------------------------------------------------------------------
+    | Layout
+    |--------------------------------------------------------------------------
+    |
+    | This is the configuration for the general layout of the admin panel.
+    |
+    | You may configure the max content width from `xl` to `7xl`, or `full`
+    | for no max width.
+    |
+    */
 
+    'layout' => [
+        'actions' => [
+            'modal' => [
+                'actions' => [
+                    'alignment' => 'left',
+                ],
+            ],
+        ],
+        'forms' => [
+            'actions' => [
+                'alignment' => 'left',
+                'are_sticky' => false,
+            ],
+            'have_inline_labels' => false,
+        ],
+        'footer' => [
+            'should_show_logo' => false,
+        ],
+        'max_content_width' => null,
+        'notifications' => [
+            'vertical_alignment' => 'top',
+            'alignment' => 'right',
+        ],
+        'sidebar' => [
+            'is_collapsible_on_desktop' => false,
+            'groups' => [
+                'are_collapsible' => true,
+            ],
+            'width' => null,
+            'collapsed_width' => null,
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Broadcasting

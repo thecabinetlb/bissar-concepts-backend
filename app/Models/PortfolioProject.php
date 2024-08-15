@@ -23,6 +23,10 @@ class PortfolioProject extends Model
         'category_id',
         'type_id'
     ];
+    protected $casts = [
+        'architects' => 'array',
+        'images' => 'array'
+    ];
     public function category()
     {
         return $this->belongsTo(Category::class);
