@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Carbon\Carbon;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
@@ -23,7 +23,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Str;
+use Illuminate\Support\Str;
 
 class CollaborationProjectResource extends Resource
 {
@@ -32,13 +32,14 @@ class CollaborationProjectResource extends Resource
     protected static ?string $navigationGroup = 'Projects';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     public static function form(Form $form): Form
     {
         return $form
         ->schema([
-        Group::make('Create a Portfolio Project')
-        ->description('fill out your portfolio project info.')
-            ->schema([
+        Section::make('Create a Collaboration Project')
+        ->description('fill out your collaborations project info.')
+        ->schema([
             TextInput::make('title')
             ->live(onBlur:true)
             ->unique(ignoreRecord: true)
@@ -46,22 +47,21 @@ class CollaborationProjectResource extends Resource
             ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
                 if ($operation === 'edit') {
                     return;
-                }                    
+                }
                 $set('slug', Str::slug($state));
             })
             ->required(),
             TextInput::make('slug')->unique(ignoreRecord: true)->minLength(1)->maxLength(150)->required(),
-            TagsInput::make('Project Types')
-            ->suggestions([
-                'Design',
-                'Houses',
-                'Interior',
-                'Living',
+            Radio::make('type_id')
+            ->label("What's the project's type?")
+            ->options([
+                1 => 'Design',
+                2 => 'Houses',
+                3 => 'Interior',
+                4 => 'Living'
             ])
-            ->nestedRecursiveRules([
-                'min:1',
-                'max:1',
-            ])->required()
+            ->inline()
+            ->required()
             ->columnSpanFull(),            
             Textarea::make('description')
             ->rows(5)
@@ -71,76 +71,75 @@ class CollaborationProjectResource extends Resource
             ->required()
             ->columnSpanFull(),
             DateTimePicker::make('completion_date')
-            ->native(false)
+            ->live(onBlur:true)
             ->default(now())
             ->afterStateUpdated(fn ($state, callable $set) => $set('year', Carbon::parse($state)->format('Y')))
             ->required()
             ->columnSpanFull(),
-            TextInput::make('year')->disabled()->required(),
             TextInput::make('location')->minLength(1)->maxLength(150)->required(),
-            TextInput::make('client')->minLength(1)->maxLength(150)->required()->columnSpanFull(),
-            TagsInput::make('architects')->default('Zaher Bissar')
-            ->disabled()
+            TextInput::make('year')->required(),              
+            TextInput::make('client')->minLength(1)->maxLength(150)->required(),
+            TagsInput::make('architects')
+            ->placeholder('Add more architects.')
+            ->default(['Zaher Bissar'])
+            ->nestedRecursiveRules([
+                'min:2',
+            ])->required(),
+        ])->columnSpan(1)->columns(2)
+        ->collapsible(),
+
+        Section::make('Project Images')
+        ->description('Add the banner, carousel and thumbnail images of your collaborations project.')
+        ->schema([
+            FileUpload::make('thumbnail')
+            ->name('Thumbnail Image')
+            ->image()
+            ->imageResizeMode('cover')
+            ->imageCropAspectRatio('1:1')
+            ->imageResizeTargetWidth('340')
+            ->imageResizeTargetHeight('348')
+            ->getUploadedFileNameForStorageUsing(
+                fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                    ->prepend('custom-prefix-'),
+            )
+            ->storeFileNamesIn('thumbnail_image_names')                    
+            ->directory('images/projects/collaborations/thumbnails')            
+            ->required()
             ->columnSpanFull(),
-            ])->columnSpan(1)->columns(2)
-            ->collapsible(),
-            Group::make('Project Images')
-            ->description('add the banner, carousel and thumbnail images of your portfolio project.')
-            ->schema([
-                Section::make('Thumbnail Image')
-                ->schema([
-                    FileUpload::make('thumbnail')
-                    ->image()
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('1:1')
-                    ->imageResizeTargetWidth('340')
-                    ->imageResizeTargetHeight('348')
-                    ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                            ->prepend('custom-prefix-'),
-                    )
-                    ->storeFileNamesIn('thumbnail_image_names')                    
-                    ->directory('images/projects/portfolio/thumbnails')            
-                    ->required()
-                    ->columnSpanFull(),
-                ])->collapsible(),
-                Section::make('Banner Image')
-                ->schema([
-                    FileUpload::make('banner')
-                    ->image()
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('2.54:1')
-                    ->imageResizeTargetWidth('1440')
-                    ->imageResizeTargetHeight('568')                    
-                    ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                            ->prepend('custom-prefix-'),
-                    )
-                    ->storeFileNamesIn('banner_image_names')
-                    ->directory('images/projects/portfolio/banners')            
-                    ->required()
-                    ->columnSpanFull(),
-                ])->collapsible(),
-                Section::make('Carousel Image')
-                ->schema([
-                    FileUpload::make('images')
-                    ->image()
-                    ->multiple()
-                    ->reorderable()
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('2.54:1')
-                    ->imageResizeTargetWidth('1440')
-                    ->imageResizeTargetHeight('568')
-                    ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                            ->prepend('custom-prefix-'),
-                    )
-                    ->storeFileNamesIn('images_file_names')
-                    ->directory('images/projects/portfolio/images')            
-                    ->required()
-                    ->columnSpanFull(),
-                ])->collapsible(),
-            ])->columnSpan(1)->columns(1)
+            FileUpload::make('banner')
+            ->name('Banner Image')
+            ->image()
+            ->imageResizeMode('cover')
+            ->imageCropAspectRatio('1.68:1')
+            ->imageResizeTargetWidth('1226')
+            ->imageResizeTargetHeight('728')                    
+            ->getUploadedFileNameForStorageUsing(
+                fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                    ->prepend('custom-prefix-'),
+            )
+            ->storeFileNamesIn('banner_image_names')
+            ->directory('images/projects/collaborations/banners')            
+            ->required()
+            ->columnSpanFull(),
+            FileUpload::make('images')
+            ->name('Carousel Images')
+            ->image()
+            ->multiple()
+            ->reorderable()
+            ->imageResizeMode('cover')
+            ->imageCropAspectRatio('2.54:1')
+            ->imageResizeTargetWidth('1440')
+            ->imageResizeTargetHeight('568')
+            ->getUploadedFileNameForStorageUsing(
+                fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                    ->prepend('custom-prefix-'),
+            )
+            ->storeFileNamesIn('images_file_names')
+            ->directory('images/projects/collaborations/images')            
+            ->required()
+            ->columnSpanFull(),
+        ])->columnSpan(1)->columns(1)
+        ->collapsible()
         ]);
     }
 
@@ -148,40 +147,37 @@ class CollaborationProjectResource extends Resource
     {
         return $table
         ->columns([
+            ImageColumn::make('thumbnail')
+            ->defaultImageUrl(url('images/bissar_concepts.webp'))->grow(false),            
             TextColumn::make('title')->sortable()->searchable(),
-            TextColumn::make('Project Type')
+            TextColumn::make('type.title')
+            ->label('Project Type')
             ->badge()
             ->sortable()->searchable(),
             TextColumn::make('slug')->sortable(),
-            ImageColumn::make('thumbnail')
-            ->defaultImageUrl(url('/images/bissar_concepts.webp'))->grow(false),
-            ImageColumn::make('banner')
-            ->defaultImageUrl(url('/images/bissar_concepts.webp'))->grow(false),
             TextColumn::make('completion_date')
-            ->name('Completion Date')
-            ->dateTime('M-d-Y')
+            ->label('Completion Date')
+            ->dateTime('Y-M-d')
             ->sortable()
             ->searchable(),         
+            TextColumn::make('location')
+            ->searchable(),               
             TextColumn::make('year')
-            ->dateTime('M-d-Y')
             ->sortable()
             ->searchable(),  
-            TextColumn::make('location')
-            ->dateTime('M-d-Y')
-            ->sortable()
-            ->searchable(),     
             TextColumn::make('created_at')
-            ->dateTime('M-d-Y')
+            ->dateTime('Y-M-d')
             ->sortable()
             ->searchable(),
             TextColumn::make('updated_at')
-            ->dateTime('M-d-Y')
+            ->dateTime('Y-M-d')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
