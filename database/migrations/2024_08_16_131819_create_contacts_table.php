@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->required();
             $table->string('email')->required();
             $table->text('message')->required();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
     }
 
