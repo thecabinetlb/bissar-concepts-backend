@@ -36,7 +36,9 @@ class CollaborationProjectSeeder extends Seeder
               ]),
               'client' => 'Art & Co.',
               'slug' => 'modern-art-gallery',
-              'category_id' => 2
+              'category_id' => 2,
+              'created_at' => now(), // Set created_at to current timestamp
+              'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
               'id' => 2, 
@@ -63,7 +65,9 @@ class CollaborationProjectSeeder extends Seeder
               ]),
               'client' => 'Business Solutions Ltd.',
               'slug' => 'corporate-office-building',
-              'category_id' => 2
+              'category_id' => 2,
+              'created_at' => now(), // Set created_at to current timestamp
+              'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
               'id' => 3, 
@@ -90,7 +94,9 @@ class CollaborationProjectSeeder extends Seeder
               ]),
               'client' => 'Luxury Stays',
               'slug' => 'luxury-hotel',
-              'category_id' => 2
+              'category_id' => 2,
+              'created_at' => now(), // Set created_at to current timestamp
+              'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
               'id' => 4, 
@@ -116,7 +122,9 @@ class CollaborationProjectSeeder extends Seeder
               ]),
               'client' => 'Urban Developments',
               'slug' => 'residential-complex',
-              'category_id' => 2
+              'category_id' => 2,
+              'created_at' => now(), // Set created_at to current timestamp
+              'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
               'id' => 5, 
@@ -140,7 +148,9 @@ class CollaborationProjectSeeder extends Seeder
               ]),
               'client' => 'Green Innovators',
               'slug' => 'eco-friendly-office-space',
-              'category_id' => 2
+              'category_id' => 2,
+              'created_at' => now(), // Set created_at to current timestamp
+              'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
               'id' => 6, 
@@ -164,7 +174,9 @@ class CollaborationProjectSeeder extends Seeder
               ]),
               'client' => 'Tokyo Builders Inc.',
               'slug' => 'modern-residential-tower',
-              'category_id' => 2
+              'category_id' => 2,
+              'created_at' => now(), // Set created_at to current timestamp
+              'updated_at' => now(), // Optionally set updated_at to current timestamp
             ]
         ];
 

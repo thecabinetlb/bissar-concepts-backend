@@ -40,7 +40,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Smith & Co.',
                 'slug' => 'modern-home-design',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
                 'id' => 2, 
@@ -64,7 +66,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Doe Enterprises',
                 'slug' => 'luxury-villa',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
                 'id' => 3, 
@@ -92,7 +96,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Interior Designs LLC',
                 'slug' => 'cozy-interior',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
                 'id' => 4, 
@@ -116,7 +122,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Urban Builders',
                 'slug' => 'urban-living-room',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
                 'id' => 5, 
@@ -144,7 +152,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Tech Innovations',
                 'slug' => 'sleek-office-design',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [ 
                 'id' => 6, 
@@ -168,7 +178,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Green Earth Foundation',
                 'slug' => 'eco-friendly-park',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [
                 'id' => 7,
@@ -191,7 +203,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Loft Living Co.',
                 'slug' => 'modern-loft',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [
                 'id' => 8,
@@ -215,7 +229,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Beachside Estates',
                 'slug' => 'seaside-retreat',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [
                 'id' => 9,
@@ -237,7 +253,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Luxury Living Group',
                 'slug' => 'penthouse-suite',
-                'category_id' => 1
+                'category_id' => 1,
+                'created_at' => now(), // Set created_at to current timestamp
+                'updated_at' => now(), // Optionally set updated_at to current timestamp
             ]        
         ];
         DB::table('portfolio_projects')->insert($projects);
