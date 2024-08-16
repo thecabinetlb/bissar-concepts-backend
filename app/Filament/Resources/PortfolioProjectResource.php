@@ -96,12 +96,7 @@ class PortfolioProjectResource extends Resource
             ->imageResizeMode('cover')
             ->imageCropAspectRatio('1:1')
             ->imageResizeTargetWidth('340')
-            ->imageResizeTargetHeight('348')
-            ->getUploadedFileNameForStorageUsing(
-                fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                    ->prepend('custom-prefix-'),
-            )
-            ->storeFileNamesIn('thumbnail_image_names')                    
+            ->imageResizeTargetHeight('348')                  
             ->directory('images/projects/portfolio/thumbnails')            
             ->required()
             ->columnSpanFull(),
@@ -112,11 +107,6 @@ class PortfolioProjectResource extends Resource
             ->imageCropAspectRatio('2.54:1')
             ->imageResizeTargetWidth('1440')
             ->imageResizeTargetHeight('568')                    
-            ->getUploadedFileNameForStorageUsing(
-                fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                    ->prepend('custom-prefix-'),
-            )
-            ->storeFileNamesIn('banner_image_names')
             ->directory('images/projects/portfolio/banners')            
             ->required()
             ->columnSpanFull(),
