@@ -11,6 +11,7 @@ class CollaborationProject extends Model
     protected $fillable = [
         'title',
         'slug',
+        'description',
         'location',
         'year',
         'architects',

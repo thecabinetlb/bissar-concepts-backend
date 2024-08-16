@@ -18,12 +18,12 @@ return new class extends Migration
             $table->json('images')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('type');
+            $table->text('description');
             $table->string('location')->nullable();
             $table->year('year')->nullable();
             $table->json('architects')->nullable();
-            $table->string('client')->nullable();
-            $table->timestamp('completion_date')->nullable();
+            $table->string('client');
+            $table->timestamp('completion_date');
             $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();

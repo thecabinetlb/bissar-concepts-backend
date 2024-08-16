@@ -12,6 +12,7 @@ class PortfolioProject extends Model
     protected $fillable = [
         'title',
         'slug',
+        'description',
         'location',
         'year',
         'architects',

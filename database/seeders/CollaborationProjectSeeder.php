@@ -13,15 +13,15 @@ class CollaborationProjectSeeder extends Seeder
             [
               'id' => 1, 
               'title' => 'Modern Art Gallery', 
-              'type' => 'Design',
+              'type_id' => 1,
               'completion_date' => '2023-05-10',
-              'architects' => ['Zaher Bissar', 'Lara Collins', 'Michael Lee'],
+              'architects' => json_encode(['Zaher Bissar', 'Lara Collins', 'Michael Lee']),
               'year' => 2023,
               'location' => 'Dubai, UAE',
-              'description' => `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+              'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
               'banner' => url('/storage/images/innerhero/projectdetails.webp'),
               'thumbnail' => url('/storage/images/projects/collaborations/thumbnails/collabs1.webp'),
-              'images' => [
+              'images' => json_encode([
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
@@ -33,23 +33,23 @@ class CollaborationProjectSeeder extends Seeder
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
-              ],
+              ]),
               'client' => 'Art & Co.',
               'slug' => 'modern-art-gallery',
-              'category' => 'Collaborations'
+              'category_id' => 2
             ],
             [ 
               'id' => 2, 
               'title' => 'Corporate Office Building', 
-              'type' => 'Houses',
+              'type_id' => 2,
               'completion_date' => '2022-08-15',
-              'architects' => ['Zaher Bissar', 'Emily Turner'],
+              'architects' => json_encode(['Zaher Bissar', 'Emily Turner']),
               'year' => 2022,
               'location' => 'Dubai, UAE',
-              'description' => `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+              'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
               'banner' => url('/storage/images/innerhero/projectdetails.webp'),
               'thumbnail' => url('/storage/images/projects/collaborations/thumbnails/collabs2.webp'),
-              'images' => [
+              'images' => json_encode([
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
@@ -60,23 +60,23 @@ class CollaborationProjectSeeder extends Seeder
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
-              ],
+              ]),
               'client' => 'Business Solutions Ltd.',
               'slug' => 'corporate-office-building',
-              'category' => 'Collaborations'
+              'category_id' => 2
             ],
             [ 
               'id' => 3, 
               'title' => 'Luxury Hotel', 
-              'type' => 'Interior',
+              'type_id' => 3,
               'completion_date' => '2021-11-02',
-              'architects' => ['Zaher Bissar', 'John Doe', 'Alice Green'],
+              'architects' => json_encode(['Zaher Bissar', 'John Doe', 'Alice Green']),
               'year' => 2021,
               'location' => 'Dubai, UAE',
-              'description' => `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+              'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
               'banner' => url('/storage/images/innerhero/projectdetails.webp'),
               'thumbnail' => url('/storage/images/projects/collaborations/thumbnails/collabs3.webp'),
-              'images' => [
+              'images' => json_encode([
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
@@ -87,23 +87,23 @@ class CollaborationProjectSeeder extends Seeder
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
-              ],
+              ]),
               'client' => 'Luxury Stays',
               'slug' => 'luxury-hotel',
-              'category' => 'Collaborations'
+              'category_id' => 2
             ],
             [ 
               'id' => 4, 
               'title' => 'Residential Complex', 
-              'type' => 'Living',
+              'type_id' => 4,
               'completion_date' => '2020-07-20',
-              'architects' => ['Zaher Bissar', 'Robert Brown'],
+              'architects' => json_encode(['Zaher Bissar', 'Robert Brown']),
               'year' => 2020,
               'location' => 'London, UK',
-              'description' => `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+              'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
               'banner' => url('/storage/images/innerhero/projectdetails.webp'),
               'thumbnail' => url('/storage/images/projects/collaborations/thumbnails/collabs4.webp'),
-              'images' => [
+              'images' => json_encode([
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
@@ -113,23 +113,23 @@ class CollaborationProjectSeeder extends Seeder
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
-              ],
+              ]),
               'client' => 'Urban Developments',
               'slug' => 'residential-complex',
-              'category' => 'Collaborations'
+              'category_id' => 2
             ],
             [ 
               'id' => 5, 
               'title' => 'Eco-Friendly Office Space', 
-              'type' => 'Design',
+              'type_id' => 1,
               'completion_date' => '2019-10-05',
-              'architects' => ['Zaher Bissar', 'Laura White'],
+              'architects' => json_encode(['Zaher Bissar', 'Laura White']),
               'year' => 2019,
               'location' => 'Berlin, Germany',
-              'description' => `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-               'banner' => url('/storage/images/innerhero/projectdetails.webp'),
+              'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+              'banner' => url('/storage/images/innerhero/projectdetails.webp'),
               'thumbnail' => url('/storage/images/projects/collaborations/thumbnails/collabs1.webp'),
-              'images' => [
+              'images' => json_encode([
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
@@ -137,23 +137,23 @@ class CollaborationProjectSeeder extends Seeder
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
-              ],
+              ]),
               'client' => 'Green Innovators',
               'slug' => 'eco-friendly-office-space',
-              'category' => 'Collaborations'
+              'category_id' => 2
             ],
             [ 
               'id' => 6, 
               'title' => 'Modern Residential Tower', 
-              'type' => 'Houses',
+              'type_id' => 2,
               'completion_date' => '2018-04-12',
-              'architects' => ['Zaher Bissar', 'David Black', 'Sophia Green'],
+              'architects' => json_encode(['Zaher Bissar', 'David Black', 'Sophia Green']),
               'year' => 2018,
               'location' => 'Tokyo, Japan',
-              'description' => `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-               'banner' => url('/storage/images/innerhero/projectdetails.webp'),
+              'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+              'banner' => url('/storage/images/innerhero/projectdetails.webp'),
               'thumbnail' => url('/storage/images/projects/collaborations/thumbnails/collabs2.webp'),
-              'images' => [
+              'images' => json_encode([
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
@@ -161,13 +161,13 @@ class CollaborationProjectSeeder extends Seeder
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
                 url('/storage/images/projects/collaborations/images/image.webp'),
-              ],
+              ]),
               'client' => 'Tokyo Builders Inc.',
               'slug' => 'modern-residential-tower',
-              'category' => 'Collaborations'
+              'category_id' => 2
             ]
         ];
 
-        DB::table('collaborations_projects')->insert($projects);
+        DB::table('collaboration_projects')->insert($projects);
     }
 }
