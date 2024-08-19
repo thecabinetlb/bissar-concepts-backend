@@ -93,7 +93,7 @@ class CollaborationProjectResource extends Resource
         ->schema([
             FileUpload::make('thumbnail')
             ->name('Thumbnail Image')
-            ->image()
+            ->image()->preserveFilenames()
             ->imageResizeMode('cover')
             ->imageCropAspectRatio('1:1')
             ->imageResizeTargetWidth('340')
@@ -108,7 +108,7 @@ class CollaborationProjectResource extends Resource
             ->columnSpanFull(),
             FileUpload::make('banner')
             ->name('Banner Image')
-            ->image()
+            ->image()->preserveFilenames()
             ->imageResizeMode('cover')
             ->imageCropAspectRatio('1.68:1')
             ->imageResizeTargetWidth('1226')
@@ -123,7 +123,7 @@ class CollaborationProjectResource extends Resource
             ->columnSpanFull(),
             FileUpload::make('images')
             ->name('Carousel Images')
-            ->image()
+            ->image()->preserveFilenames()
             ->multiple()
             ->reorderable()
             ->imageResizeMode('cover')

@@ -92,7 +92,7 @@ class PortfolioProjectResource extends Resource
         ->schema([
             FileUpload::make('thumbnail')
             ->name('Thumbnail Image')
-            ->image()
+            ->image()->preserveFilenames()
             ->imageResizeMode('cover')
             ->imageCropAspectRatio('1:1')
             ->imageResizeTargetWidth('340')
@@ -102,7 +102,7 @@ class PortfolioProjectResource extends Resource
             ->columnSpanFull(),
             FileUpload::make('banner')
             ->name('Banner Image')
-            ->image()
+            ->image()->preserveFilenames()
             ->imageResizeMode('cover')
             ->imageCropAspectRatio('2.54:1')
             ->imageResizeTargetWidth('1440')
@@ -112,7 +112,7 @@ class PortfolioProjectResource extends Resource
             ->columnSpanFull(),
             FileUpload::make('images')
             ->name('Carousel Images')
-            ->image()
+            ->image()->preserveFilenames()
             ->multiple()
             ->reorderable()
             ->imageResizeMode('cover')
