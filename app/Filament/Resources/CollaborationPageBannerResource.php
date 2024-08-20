@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\HomepageBannerResource\Pages;
-use App\Filament\Resources\HomepageBannerResource\RelationManagers;
-use App\Models\HomepageBanner;
+use App\Filament\Resources\CollaborationPageBannerResource\Pages;
+use App\Filament\Resources\CollaborationPageBannerResource\RelationManagers;
+use App\Models\CollaborationBanner;
+use App\Models\CollaborationPageBanner;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -19,11 +20,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
-class HomepageBannerResource extends Resource
+class CollaborationPageBannerResource extends Resource
 {
-    protected static ?string $model = HomepageBanner::class;
+    protected static ?string $model = CollaborationBanner::class;
 
     protected static ?string $navigationGroup = 'Banners';
 
@@ -33,8 +33,8 @@ class HomepageBannerResource extends Resource
     {
         return $form
             ->schema([
-            Section::make('Homepage Image')
-            ->description('Add your homepage banner image and title5 here.')
+            Section::make('Portfolio Page Image')
+            ->description('Add your Portfolio page banner image and title here.')
             ->schema([
                 TextInput::make('title')
                 ->live(onBlur:true)
@@ -49,9 +49,9 @@ class HomepageBannerResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageResizeMode('cover')
-                ->imageCropAspectRatio('2.08:1')
+                ->imageCropAspectRatio('2.54:1')
                 ->imageResizeTargetWidth('1440')
-                ->imageResizeTargetHeight('758')                    
+                ->imageResizeTargetHeight('568')                    
                 ->directory('images/hero')
                 ->acceptedFileTypes(['image/webp']) // Ensures only WebP images are accepted
                 ->maxSize(3072)  
@@ -67,11 +67,11 @@ class HomepageBannerResource extends Resource
                 ->columnSpanFull()          
                 ->required(),
                 Toggle::make('is_featured')
-                ->label('Set as Homepage Banner')
+                ->label('Set as the Portfolio page banner')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
                     if ($state) {
                         // Automatically unset other featured banners
-                        HomepageBanner::where('is_featured', true)
+                        CollaborationBanner::where('is_featured', true)
                             ->where('id', '!=', $get('id')) // Exclude current record
                             ->update(['is_featured' => false]);
                     }
@@ -115,20 +115,12 @@ class HomepageBannerResource extends Resource
                 ]),
             ]);
     }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListHomepageBanners::route('/'),
-            'create' => Pages\CreateHomepageBanner::route('/create'),
-            'edit' => Pages\EditHomepageBanner::route('/{record}/edit'),
+            'index' => Pages\ListCollaborationPageBanners::route('/'),
+            'create' => Pages\CreateCollaborationPageBanner::route('/create'),
+            'edit' => Pages\EditCollaborationPageBanner::route('/{record}/edit'),
         ];
     }
 }

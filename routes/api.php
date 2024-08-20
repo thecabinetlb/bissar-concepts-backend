@@ -4,6 +4,8 @@ use App\Http\Controllers\API\V1\CollaborationProjectController;
 use App\Http\Controllers\API\V1\ContactController;
 use App\Http\Controllers\API\V1\HomepageBannerController;
 use App\Http\Controllers\API\V1\PortfolioProjectController;
+use App\Http\Controllers\CollaborationBannerController;
+use App\Http\Controllers\PortfolioBannerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +34,9 @@ Route::get('collaboration-projects/{slug}', [CollaborationProjectController::cla
 
 Route::get('homepage-banner', [HomepageBannerController::class, 'index']);
 Route::get('homepage-banner/featured', [HomepageBannerController::class, 'getFeatured']);
+
+Route::get('portfolio-banner', [PortfolioBannerController::class, 'index']);
+Route::get('portfolio-banner/featured', [PortfolioBannerController::class, 'getFeatured']);
+
+Route::get('collaboration-banner', [CollaborationBannerController::class, 'index']);
+Route::get('collaboration-banner/featured', [CollaborationBannerController::class, 'getFeatured']);
