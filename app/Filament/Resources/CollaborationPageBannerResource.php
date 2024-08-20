@@ -37,13 +37,8 @@ class CollaborationPageBannerResource extends Resource
             ->description('Add your Portfolio page banner image and title here.')
             ->schema([
                 TextInput::make('title')
-                ->live(onBlur:true)
-                ->afterStateUpdated(function ($state, Forms\Set $set) {
-                    $set('alt_text', $state);
-                })
                 ->minLength(1)->maxLength(150)
                 ->required(),
-                TextInput::make('alt_text')->minLength(1)->maxLength(150),
                 FileUpload::make('image')
                 ->name('Banner Image')
                 ->image()
@@ -52,7 +47,7 @@ class CollaborationPageBannerResource extends Resource
                 ->imageCropAspectRatio('2.54:1')
                 ->imageResizeTargetWidth('1440')
                 ->imageResizeTargetHeight('568')                    
-                ->directory('images/hero')
+                ->directory('images/collaboration')
                 ->acceptedFileTypes(['image/webp']) // Ensures only WebP images are accepted
                 ->maxSize(3072)  
                 ->directory('public')
