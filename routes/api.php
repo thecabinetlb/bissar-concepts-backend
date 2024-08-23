@@ -4,9 +4,9 @@ use App\Http\Controllers\API\V1\CollaborationProjectController;
 use App\Http\Controllers\API\V1\ContactController;
 use App\Http\Controllers\API\V1\HomepageBannerController;
 use App\Http\Controllers\API\V1\PortfolioProjectController;
+use App\Http\Controllers\API\V1\SectionStylesController;
 use App\Http\Controllers\CollaborationBannerController;
 use App\Http\Controllers\PortfolioBannerController;
-use App\Http\Controllers\StylesSectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,5 +42,5 @@ Route::get('portfolio-banner/featured', [PortfolioBannerController::class, 'getF
 Route::get('collaboration-banner', [CollaborationBannerController::class, 'index']);
 Route::get('collaboration-banner/featured', [CollaborationBannerController::class, 'getFeatured']);
 
-Route::get('styles-section', [StylesSectionController::class, 'index']);
-Route::get('styles-section/featured', [StylesSectionController::class, 'getFeatured']);
+Route::get('styles-section', [SectionStylesController::class, 'index']);
+Route::get('styles-section/featured', [SectionStylesController::class, 'getFeatured']);

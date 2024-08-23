@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\HomepageBannerResource\Pages;
 use App\Filament\Resources\HomepageBannerResource\RelationManagers;
 use App\Models\HomepageBanner;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -44,14 +45,25 @@ class HomepageBannerResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageResizeMode('cover')
-                ->imageCropAspectRatio('2.08:1')
+                ->imageCropAspectRatio('2:1')
                 ->imageResizeTargetWidth('1440')
-                ->imageResizeTargetHeight('758')                    
+                ->imageResizeTargetHeight('741')                    
                 ->directory('images/hero')
-                ->acceptedFileTypes(['image/webp']) // Ensures only WebP images are accepted
+                ->afterStateUpdated(function (Closure $set, $state) {
+                    if (is_string($state) && file_exists($state)) {
+                        // Generate a unique filename with a .webp extension
+                        $filename = time() . '.webp';
+            
+                        // Convert the uploaded image to WebP and save it
+                        HomepageBanner::make($state)
+                            ->encode('webp')
+                            ->save(public_path('storage/images/hero/' . $filename));
+            
+                        // Set the path to the converted image
+                        $set('image', 'images/hero/' . $filename);
+                    }
+                })
                 ->maxSize(3072)  
-                ->directory('public')
-                ->storeFileNamesIn('original_filenames')              
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')
@@ -81,7 +93,7 @@ class HomepageBannerResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')->disk('public'),            
+                ImageColumn::make('image'),            
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('is_featured')
                 ->label('Status')

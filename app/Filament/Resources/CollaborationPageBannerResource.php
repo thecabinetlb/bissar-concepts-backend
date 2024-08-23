@@ -50,7 +50,6 @@ class CollaborationPageBannerResource extends Resource
                 ->directory('images/collaboration')
                 ->acceptedFileTypes(['image/webp']) // Ensures only WebP images are accepted
                 ->maxSize(3072)  
-                ->directory('public')
                 ->storeFileNamesIn('original_filenames')              
                 ->columnSpanFull()          
                 ->required(),
@@ -81,7 +80,7 @@ class CollaborationPageBannerResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')->disk('public'),            
+                ImageColumn::make('image'),            
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('is_featured')
                 ->label('Status')
