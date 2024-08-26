@@ -15,7 +15,6 @@ class SectionStylesSeeder extends Seeder
     {
         $data = [
             [
-                "id"=> 1,
                 "title"=> "Contemporary Design",
                 "image"=> url('/images/styles/styles1.webp'),
                 "subtitle"=> "Modern flair with a classical spin",
@@ -24,7 +23,6 @@ class SectionStylesSeeder extends Seeder
                 'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [
-                "id"=> 2,
                 "title"=> "Modern Home",
                 "image"=> url('/images/styles/styles2.webp'),
                 "subtitle"=> "Where sleek meets chic",
@@ -33,7 +31,6 @@ class SectionStylesSeeder extends Seeder
                 'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
             [
-                "id"=> 3,
                 "title"=> "Classic Home",
                 "image"=> url('/images/styles/styles3.webp'),
                 "subtitle"=> "A touch of timeless elegance",

@@ -19,18 +19,13 @@ class CollaborationProject extends Model
         'images',
         'thumbnail',
         'banner',
-        'completion_date',
-        'category_id',
+        'categry',
         'type_id'
     ];
     protected $casts = [
         'architects' => 'array',
         'images' => 'array'
     ];
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
     public function type()
     {
         return $this->belongsTo(Type::class);

@@ -12,12 +12,4 @@ class Category extends Model
         'title',
         'slug',
     ];
-    public function portfolioProjects()
-    {
-        return $this->hasMany(PortfolioProject::class);
-    }
-    public function collaborationProjects()
-    {
-        return $this->hasMany(CollaborationProject::class);
-    }
 }

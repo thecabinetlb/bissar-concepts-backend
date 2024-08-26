@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('collaboration_banners', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('alt_text')->default('Bissar Concepts')->change();
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->text('description')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->timestamps();
