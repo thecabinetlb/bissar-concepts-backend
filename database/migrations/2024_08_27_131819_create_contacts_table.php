@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->required();
             $table->string('email')->required();
-            $table->text('message')->required();
+            $table->text('content')->required();
             $table->timestamps();
         });
     }

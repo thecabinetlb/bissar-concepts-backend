@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMessage;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -18,19 +20,26 @@ class ContactController extends Controller
         request()->validate([
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
-            'message' => 'required',
+            'content' => 'required',
         ],
         [
             'name.required' => 'Name is required.',
             'email.required' => 'Email is required',
             'email.email' => 'Please specify a real email',
-            'message.required' => 'Please enter your message.',
+            'content.required' => 'Please enter your message.',
         ]);
 
-        return Contact::create([
+        $contact = Contact::create([
             'name' => request('name'),
             'email' => request('email'),               
-            'message' => request('message')              
+            'content' => request('content')              
         ]);
+        // Send the email
+        try {
+            Mail::to('najatt.ismail@gmail.com')->send(new ContactMessage($contact));
+            return 'Email sent successfully.';
+        } catch (\Exception $e) {
+            return 'Failed to send email. Please check the logs.';
+        }
     }
 }
