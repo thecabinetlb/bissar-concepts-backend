@@ -40,13 +40,9 @@ class ContactController extends Controller
             'content' => request('content'),
         ];
 
-
-        // Send the email
         try {
-            // Debug the $contact array
-            $contactArray = (array) $contact;            
-            
-            Mail::to('najatt.ismail@gmail.com')->send(new ContactMessage($contactArray));
+ 
+            Mail::to('najatt.ismail@gmail.com')->send(new ContactMessage($contact));
             return 'Email sent successfully.';
         } catch (\Exception $e) {
             return 'Failed to send email: ' . $e->getMessage();

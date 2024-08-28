@@ -6,8 +6,8 @@
     <title>New Contact Form Submission</title>
 </head>
 <body>
-    <p>Name: {{ $name }}</p>
-    <p>Email: {{ $email }}</p>
-    <p>Content: {{ $content }}</p>
+    <p>Name: {{ $contact['name'] }}</p>
+    <p>Email: {{ $contact['email'] }}</p>
+    <p>Message: {{ $contact['content'] }}</p>
 </body>
 </html>
