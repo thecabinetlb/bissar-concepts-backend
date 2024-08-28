@@ -29,17 +29,27 @@ class ContactController extends Controller
             'content.required' => 'Please enter your message.',
         ]);
 
-        $contact = Contact::create([
+        Contact::create([
             'name' => request('name'),
             'email' => request('email'),               
             'content' => request('content')              
         ]);
+        $contact = [
+            'name' => request('name'),
+            'email' => request('email'),
+            'content' => request('content'),
+        ];
+
+
         // Send the email
         try {
-            Mail::to('najatt.ismail@gmail.com')->send(new ContactMessage($contact));
+            // Debug the $contact array
+            $contactArray = (array) $contact;            
+            
+            Mail::to('najatt.ismail@gmail.com')->send(new ContactMessage($contactArray));
             return 'Email sent successfully.';
         } catch (\Exception $e) {
-            return 'Failed to send email. Please check the logs.';
+            return 'Failed to send email: ' . $e->getMessage();
         }
     }
 }

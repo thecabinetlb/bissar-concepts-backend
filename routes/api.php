@@ -20,6 +20,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-email-basic', function () {
+    try {
+        Mail::raw('This is a test email.', function ($message) {
+            $message->to('najatt.ismail@gmail.com')
+                    ->subject('Test Email');
+        });
+
+        return 'Basic email sent successfully.';
+    } catch (\Exception $e) {
+        return 'Failed to send email: ' . $e->getMessage();
+    }
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

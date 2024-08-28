@@ -34,19 +34,19 @@ return [
     */
 
     'mailers' => [
-        'mailers' => [
-            'tronsport' => 'mailtrap'
-        ],
         'smtp' => [
-            'host' => env('MAIL_HOST', 'sandbox.smtp.mailtrap.io'),
+             'transport' => 'smtp',
+           'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
             'port' => env('MAIL_PORT', 2525),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'encryption' => env('MAIL_ENCRYPTION', 'null'),
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'najatt.ismail@gmail.com'),
+                'address' => env('MAIL_FROM_ADDRESS', 'admin@bissarconcepts.com'),
                 'name' => env('MAIL_FROM_NAME', 'Example'),
             ],
+            'timeout' => null,
+            'auth_mode' => null,
         ],
 
         'ses' => [
