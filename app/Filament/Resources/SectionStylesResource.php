@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SectionStylesResource\Pages;
 use App\Filament\Resources\SectionStylesResource\RelationManagers;
 use App\Models\SectionStyles;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -46,14 +47,23 @@ class SectionStylesResource extends Resource
                 ->name('Banner Image')
                 ->image()
                 ->preserveFilenames()
-                ->imageResizeMode('cover')
-                ->imageCropAspectRatio('0.68:1')
-                ->imageResizeTargetWidth('480')
-                ->imageResizeTargetHeight('707')                    
+                ->imageEditor()
                 ->directory('images/styles')
-                ->acceptedFileTypes(['image/webp']) // Ensures only WebP images are accepted
+                ->afterStateUpdated(function (Closure $set, $state) {
+                    if (is_string($state) && file_exists($state)) {
+                        // Generate a unique filename with a .webp extension
+                        $filename = time() . '.webp';
+            
+                        // Convert the uploaded image to WebP and save it
+                        SectionStyles::make($state)
+                            ->encode('webp')
+                            ->save(public_path('storage/images/styles/' . $filename));
+            
+                        // Set the path to the converted image
+                        $set('image', 'images/styles/' . $filename);
+                    }
+                })
                 ->maxSize(3072)  
-                ->storeFileNamesIn('original_filenames')              
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

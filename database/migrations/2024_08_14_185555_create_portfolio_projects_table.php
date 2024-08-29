@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('portfolio_projects', function (Blueprint $table) {
             $table->id();
-            $table->string('banner');
+            $table->string('title');
             $table->string('category');
+            $table->json('architects');
+            $table->year('year');           
+            $table->string('location');
+            $table->text('description')->nullable();
+            $table->string('banner');
             $table->string('thumbnail');
             $table->json('images');
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->string('location');
-            $table->year('year');
-            $table->json('architects');
             $table->string('client');
+            $table->string('slug')->unique();
+
             $table->unsignedBigInteger('type_id')->nullable();
             $table->timestamps();
 

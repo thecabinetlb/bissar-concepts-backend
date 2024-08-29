@@ -6,10 +6,12 @@ use App\Filament\Resources\PortfolioProjectResource\Pages;
 use App\Filament\Resources\PortfolioProjectResource\RelationManagers;
 use App\Models\PortfolioProject;
 use Carbon\Carbon;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
@@ -53,28 +55,18 @@ class PortfolioProjectResource extends Resource
             })
             ->required(),
             TextInput::make('slug')->unique(ignoreRecord: true)->minLength(1)->maxLength(150)->required(),
-            Radio::make('type_id')
-            ->label("What's the project's type?")
+            Radio::make('category')
+            ->label("What's the project's catefory?")
             ->options([
-                1 => 'Design',
-                2 => 'Houses',
-                3 => 'Interior',
-                4 => 'Living'
+                'Design',
+                'Houses',
+                'Interior',
+                'Living'
             ])
             ->inline()
             ->required()
             ->columnSpanFull(),            
-            Textarea::make('description')
-            ->rows(5)
-            ->cols(20)
-            ->minLength(10)
-            ->maxLength(300)
-            ->required()
-            ->columnSpanFull(),
-            DateTimePicker::make('completion_date')
-            ->live(onBlur:true)
-            ->default(now())
-            ->afterStateUpdated(fn ($state, callable $set) => $set('year', Carbon::parse($state)->format('Y')))
+            RichEditor::make('description')
             ->required()
             ->columnSpanFull(),
             TextInput::make('location')->minLength(1)->maxLength(150)->required(),
@@ -92,22 +84,47 @@ class PortfolioProjectResource extends Resource
         ->schema([
             FileUpload::make('thumbnail')
             ->name('Thumbnail Image')
-            ->image()->preserveFilenames()
-            ->imageResizeMode('cover')
-            ->imageCropAspectRatio('1:1')
-            ->imageResizeTargetWidth('340')
-            ->imageResizeTargetHeight('348')                  
+            ->image()
+            ->preserveFilenames()
+            ->imageEditor()
+            ->afterStateUpdated(function (Closure $set, $state) {
+                if (is_string($state) && file_exists($state)) {
+                    // Generate a unique filename with a .webp extension
+                    $filename = time() . '.webp';
+        
+                    // Convert the uploaded image to WebP and save it
+                    PortfolioProject::make($state)
+                        ->encode('webp')
+                        ->save(public_path('storage/images/projects/portfolio/thumbnails' . $filename));
+        
+                    // Set the path to the converted image
+                    $set('image', 'images/projects/portfolio/thumbnails' . $filename);
+                }
+            })        
+            ->maxSize(3072)  
             ->directory('images/projects/portfolio/thumbnails')            
             ->required()
             ->columnSpanFull(),
             FileUpload::make('banner')
             ->name('Banner Image')
-            ->image()->preserveFilenames()
-            ->imageResizeMode('cover')
-            ->imageCropAspectRatio('2.54:1')
-            ->imageResizeTargetWidth('1440')
-            ->imageResizeTargetHeight('568')                    
-            ->directory('images/projects/portfolio/banners')            
+            ->image()
+            ->preserveFilenames()
+            ->imageEditor()
+            ->afterStateUpdated(function (Closure $set, $state) {
+                if (is_string($state) && file_exists($state)) {
+                    // Generate a unique filename with a .webp extension
+                    $filename = time() . '.webp';
+        
+                    // Convert the uploaded image to WebP and save it
+                    PortfolioProject::make($state)
+                        ->encode('webp')
+                        ->save(public_path('storage/images/projects/portfolio/banners' . $filename));
+        
+                    // Set the path to the converted image
+                    $set('image', 'images/projects/portfolio/banners' . $filename);
+                }
+            })        
+            ->maxSize(3072)            
             ->required()
             ->columnSpanFull(),
             FileUpload::make('images')
@@ -115,15 +132,22 @@ class PortfolioProjectResource extends Resource
             ->image()->preserveFilenames()
             ->multiple()
             ->reorderable()
-            ->imageResizeMode('cover')
-            ->imageCropAspectRatio('1.68:1')
-            ->imageResizeTargetWidth('1226')
-            ->imageResizeTargetHeight('728')
-            ->getUploadedFileNameForStorageUsing(
-                fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                    ->prepend('custom-prefix-'),
-            )
-            ->storeFileNamesIn('images_file_names')
+            ->imageEditor()
+            ->afterStateUpdated(function (Closure $set, $state) {
+                if (is_string($state) && file_exists($state)) {
+                    // Generate a unique filename with a .webp extension
+                    $filename = time() . '.webp';
+        
+                    // Convert the uploaded image to WebP and save it
+                    PortfolioProject::make($state)
+                        ->encode('webp')
+                        ->save(public_path('storage/images/projects/portfolio/images' . $filename));
+        
+                    // Set the path to the converted image
+                    $set('image', 'images/projects/portfolio/images' . $filename);
+                }
+            })        
+            ->maxSize(3072)
             ->directory('images/projects/portfolio/images')            
             ->required()
             ->columnSpanFull(),
@@ -139,16 +163,10 @@ class PortfolioProjectResource extends Resource
             ImageColumn::make('thumbnail')
             ->defaultImageUrl(url('images/bissar_concepts.webp'))->grow(false),            
             TextColumn::make('title')->sortable()->searchable(),
-            TextColumn::make('type.title')
-            ->label('Project Type')
+            TextColumn::make('category')
             ->badge()
             ->sortable()->searchable(),
-            TextColumn::make('slug')->sortable(),
-            TextColumn::make('completion_date')
-            ->label('Completion Date')
-            ->dateTime('Y-M-d')
-            ->sortable()
-            ->searchable(),         
+            TextColumn::make('slug')->sortable(),         
             TextColumn::make('location')->searchable(),     
             TextColumn::make('year')
             ->sortable()

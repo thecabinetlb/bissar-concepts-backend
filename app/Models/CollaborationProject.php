@@ -10,16 +10,16 @@ class CollaborationProject extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'slug',
-        'description',
-        'location',
-        'year',
+        'category',
         'architects',
-        'client',
-        'images',
-        'thumbnail',
+        'year',
+        'location',
+        'description',
         'banner',
-        'categry',
+        'thumbnail',
+        'images',
+        'client',
+        'slug',
         'type_id'
     ];
     protected $casts = [

@@ -11,16 +11,16 @@ class PortfolioProject extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'slug',
-        'description',
-        'location',
-        'year',
-        'architects',
-        'client',
-        'images',
-        'thumbnail',
-        'banner',
         'category',
+        'architects',
+        'year',
+        'location',
+        'description',
+        'banner',
+        'thumbnail',
+        'images',
+        'client',
+        'slug',
         'type_id'
     ];
     protected $casts = [

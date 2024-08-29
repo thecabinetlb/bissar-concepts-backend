@@ -41,7 +41,7 @@ class ContactResource extends Resource
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('email'),
-                TextColumn::make('message'),
+                TextColumn::make('content')->wrap(),
                 TextColumn::make('created_at')->sortable(),
             ])
             ->filters([

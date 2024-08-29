@@ -6,6 +6,7 @@ use App\Filament\Resources\PortfolioPageBannerResource\Pages;
 use App\Filament\Resources\PortfolioPageBannerResource\RelationManagers;
 use App\Models\PortfolioBanner;
 use App\Models\PortfolioPageBanner;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -43,14 +44,23 @@ class PortfolioPageBannerResource extends Resource
                 ->name('Banner Image')
                 ->image()
                 ->preserveFilenames()
-                ->imageResizeMode('cover')
-                ->imageCropAspectRatio('2.54:1')
-                ->imageResizeTargetWidth('1440')
-                ->imageResizeTargetHeight('568')                    
+                ->imageEditor()                   
                 ->directory('images/portfolio')
-                ->acceptedFileTypes(['image/webp']) // Ensures only WebP images are accepted
+                ->afterStateUpdated(function (Closure $set, $state) {
+                    if (is_string($state) && file_exists($state)) {
+                        // Generate a unique filename with a .webp extension
+                        $filename = time() . '.webp';
+            
+                        // Convert the uploaded image to WebP and save it
+                        PortfolioBanner::make($state)
+                            ->encode('webp')
+                            ->save(public_path('storage/images/portfolio/' . $filename));
+            
+                        // Set the path to the converted image
+                        $set('image', 'images/portfolio/' . $filename);
+                    }
+                })                
                 ->maxSize(3072)  
-                ->storeFileNamesIn('original_filenames')              
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

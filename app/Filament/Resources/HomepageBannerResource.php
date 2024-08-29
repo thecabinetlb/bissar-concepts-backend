@@ -44,10 +44,7 @@ class HomepageBannerResource extends Resource
                 ->name('Banner Image')
                 ->image()
                 ->preserveFilenames()
-                ->imageResizeMode('cover')
-                ->imageCropAspectRatio('2:1')
-                ->imageResizeTargetWidth('1440')
-                ->imageResizeTargetHeight('741')                    
+                ->imageEditor()                                   
                 ->directory('images/hero')
                 ->afterStateUpdated(function (Closure $set, $state) {
                     if (is_string($state) && file_exists($state)) {
@@ -62,7 +59,7 @@ class HomepageBannerResource extends Resource
                         // Set the path to the converted image
                         $set('image', 'images/hero/' . $filename);
                     }
-                })
+                })                        
                 ->maxSize(3072)  
                 ->columnSpanFull()          
                 ->required(),
