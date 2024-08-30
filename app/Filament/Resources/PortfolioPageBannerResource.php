@@ -6,7 +6,6 @@ use App\Filament\Resources\PortfolioPageBannerResource\Pages;
 use App\Filament\Resources\PortfolioPageBannerResource\RelationManagers;
 use App\Models\PortfolioBanner;
 use App\Models\PortfolioPageBanner;
-use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -46,7 +45,7 @@ class PortfolioPageBannerResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()                   
                 ->directory('images/portfolio')
-                ->afterStateUpdated(function (Closure $set, $state) {
+                ->afterStateUpdated(function ($set, $state) {
                     if (is_string($state) && file_exists($state)) {
                         // Generate a unique filename with a .webp extension
                         $filename = time() . '.webp';
@@ -112,6 +111,7 @@ class PortfolioPageBannerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

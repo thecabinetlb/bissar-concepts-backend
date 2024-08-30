@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SectionStylesResource\Pages;
 use App\Filament\Resources\SectionStylesResource\RelationManagers;
 use App\Models\SectionStyles;
-use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -49,7 +48,7 @@ class SectionStylesResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()
                 ->directory('images/styles')
-                ->afterStateUpdated(function (Closure $set, $state) {
+                ->afterStateUpdated(function ($set, $state) {
                     if (is_string($state) && file_exists($state)) {
                         // Generate a unique filename with a .webp extension
                         $filename = time() . '.webp';
@@ -130,6 +129,7 @@ class SectionStylesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

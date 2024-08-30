@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\HomepageBannerResource\Pages;
 use App\Filament\Resources\HomepageBannerResource\RelationManagers;
 use App\Models\HomepageBanner;
-use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -46,7 +45,7 @@ class HomepageBannerResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()                                   
                 ->directory('images/hero')
-                ->afterStateUpdated(function (Closure $set, $state) {
+                ->afterStateUpdated(function ( $set, $state) {
                     if (is_string($state) && file_exists($state)) {
                         // Generate a unique filename with a .webp extension
                         $filename = time() . '.webp';
@@ -68,8 +67,7 @@ class HomepageBannerResource extends Resource
                 ->cols(20)
                 ->minLength(10)
                 ->maxLength(250)
-                ->columnSpanFull()          
-                ->required(),
+                ->columnSpanFull(),
                 Toggle::make('is_featured')
                 ->label('Set as Homepage Banner')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
@@ -112,6 +110,7 @@ class HomepageBannerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

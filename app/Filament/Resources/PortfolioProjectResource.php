@@ -6,7 +6,6 @@ use App\Filament\Resources\PortfolioProjectResource\Pages;
 use App\Filament\Resources\PortfolioProjectResource\RelationManagers;
 use App\Models\PortfolioProject;
 use Carbon\Carbon;
-use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -87,7 +86,7 @@ class PortfolioProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()
-            ->afterStateUpdated(function (Closure $set, $state) {
+            ->afterStateUpdated(function ($set, $state) {
                 if (is_string($state) && file_exists($state)) {
                     // Generate a unique filename with a .webp extension
                     $filename = time() . '.webp';
@@ -110,7 +109,7 @@ class PortfolioProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()
-            ->afterStateUpdated(function (Closure $set, $state) {
+            ->afterStateUpdated(function ($set, $state) {
                 if (is_string($state) && file_exists($state)) {
                     // Generate a unique filename with a .webp extension
                     $filename = time() . '.webp';
@@ -133,7 +132,7 @@ class PortfolioProjectResource extends Resource
             ->multiple()
             ->reorderable()
             ->imageEditor()
-            ->afterStateUpdated(function (Closure $set, $state) {
+            ->afterStateUpdated(function ($set, $state) {
                 if (is_string($state) && file_exists($state)) {
                     // Generate a unique filename with a .webp extension
                     $filename = time() . '.webp';

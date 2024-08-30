@@ -13,7 +13,6 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Carbon\Carbon;
-use Closure;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
@@ -86,7 +85,7 @@ class CollaborationProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()
-            ->afterStateUpdated(function (Closure $set, $state) {
+            ->afterStateUpdated(function ($set, $state) {
                 if (is_string($state) && file_exists($state)) {
                     // Generate a unique filename with a .webp extension
                     $filename = time() . '.webp';
@@ -109,7 +108,7 @@ class CollaborationProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()
-            ->afterStateUpdated(function (Closure $set, $state) {
+            ->afterStateUpdated(function ($set, $state) {
                 if (is_string($state) && file_exists($state)) {
                     // Generate a unique filename with a .webp extension
                     $filename = time() . '.webp';
@@ -132,7 +131,7 @@ class CollaborationProjectResource extends Resource
             ->multiple()
             ->reorderable()
             ->imageEditor()
-            ->afterStateUpdated(function (Closure $set, $state) {
+            ->afterStateUpdated(function ($set, $state) {
                 if (is_string($state) && file_exists($state)) {
                     // Generate a unique filename with a .webp extension
                     $filename = time() . '.webp';

@@ -6,7 +6,6 @@ use App\Filament\Resources\CollaborationPageBannerResource\Pages;
 use App\Filament\Resources\CollaborationPageBannerResource\RelationManagers;
 use App\Models\CollaborationBanner;
 use App\Models\CollaborationPageBanner;
-use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -46,7 +45,7 @@ class CollaborationPageBannerResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()
                 ->directory('images/collaboration')
-                ->afterStateUpdated(function (Closure $set, $state) {
+                ->afterStateUpdated(function ($set, $state) {
                     if (is_string($state) && file_exists($state)) {
                         // Generate a unique filename with a .webp extension
                         $filename = time() . '.webp';
@@ -112,6 +111,7 @@ class CollaborationPageBannerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
