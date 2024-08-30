@@ -5,8 +5,8 @@ use App\Http\Controllers\API\V1\ContactController;
 use App\Http\Controllers\API\V1\HomepageBannerController;
 use App\Http\Controllers\API\V1\PortfolioProjectController;
 use App\Http\Controllers\API\V1\SectionStylesController;
-use App\Http\Controllers\CollaborationBannerController;
-use App\Http\Controllers\PortfolioBannerController;
+use App\Http\Controllers\API\V1\CollaborationBannerController;
+use App\Http\Controllers\API\V1\PortfolioBannerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\CollaborationBanner;
-use App\Models\PortfolioBanner;
 use Illuminate\Http\Request;
 
 class CollaborationBannerController extends Controller
