@@ -69,7 +69,7 @@ class SectionStylesResource extends Resource
                 ->rows(5)
                 ->cols(20)
                 ->minLength(10)
-                ->maxLength(250)
+                ->maxLength(500)
                 ->columnSpanFull()          
                 ->required(),
                 Toggle::make('is_featured')

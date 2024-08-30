@@ -13,13 +13,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Carbon\Carbon;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TagsInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -53,15 +50,8 @@ class CollaborationProjectResource extends Resource
             })
             ->required(),
             TextInput::make('slug')->unique(ignoreRecord: true)->minLength(1)->maxLength(150)->required(),
-            Radio::make('category')
-            ->label("What's the project's catefory?")
-            ->options([
-                'Design',
-                'Houses',
-                'Interior',
-                'Living'
-            ])
-            ->inline()
+            TextInput::make('category')
+            ->placeholder("What's the project's catefory?")
             ->required()
             ->columnSpanFull(),            
             RichEditor::make('description')
@@ -72,8 +62,7 @@ class CollaborationProjectResource extends Resource
             TextInput::make('client')->minLength(1)->maxLength(150)->required(),
             TagsInput::make('architects')
             ->placeholder(' ')
-            ->default(['Zaher Bissar'])
-            ->disabled(),
+            ->default(['Zaher Bissar']),
         ])->columnSpan(1)->columns(2)
         ->collapsible(),
 

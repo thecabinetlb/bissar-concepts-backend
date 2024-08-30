@@ -7,13 +7,11 @@ use App\Filament\Resources\PortfolioProjectResource\RelationManagers;
 use App\Models\PortfolioProject;
 use Carbon\Carbon;
 use Filament\Forms;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TagsInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -54,15 +52,8 @@ class PortfolioProjectResource extends Resource
             })
             ->required(),
             TextInput::make('slug')->unique(ignoreRecord: true)->minLength(1)->maxLength(150)->required(),
-            Radio::make('category')
-            ->label("What's the project's catefory?")
-            ->options([
-                'Design',
-                'Houses',
-                'Interior',
-                'Living'
-            ])
-            ->inline()
+            TextInput::make('category')
+            ->placeholder("What's the project's catefory?")
             ->required()
             ->columnSpanFull(),            
             RichEditor::make('description')
@@ -75,6 +66,8 @@ class PortfolioProjectResource extends Resource
             ->placeholder(' ')
             ->default(['Zaher Bissar'])
             ->disabled(),
+            Hidden::make('architects')
+            ->default(['Zaher Bissar']),
         ])->columnSpan(1)->columns(2)
         ->collapsible(),
 

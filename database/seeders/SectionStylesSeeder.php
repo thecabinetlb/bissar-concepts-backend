@@ -19,6 +19,7 @@ class SectionStylesSeeder extends Seeder
                 "image"=> url('/images/styles/styles1.webp'),
                 "subtitle"=> "Modern flair with a classical spin",
                 "description"=> "Step into a world that mirrors your bold and unrestrained creativity. A captivating fusion of freeform style with luxurious materials and a touch of traditional craftsmanship, resulting in spaces that defy convention and evoke a sense of unparalleled distinction.",
+                "is_featured"=>true,
                 'created_at' => now(), // Set created_at to current timestamp
                 'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
@@ -27,6 +28,7 @@ class SectionStylesSeeder extends Seeder
                 "image"=> url('/images/styles/styles2.webp'),
                 "subtitle"=> "Where sleek meets chic",
                 "description"=> "Your sanctuary of sophistication, where minimalist elegance and clean finishes take center stage. An open-concept layout flooded with natural light, featuring a sleek surface and uncluttered design, and reflecting simplicity and functionality.",
+                "is_featured"=>true,
                 'created_at' => now(), // Set created_at to current timestamp
                 'updated_at' => now(), // Optionally set updated_at to current timestamp
             ],
@@ -35,6 +37,7 @@ class SectionStylesSeeder extends Seeder
                 "image"=> url('/images/styles/styles3.webp'),
                 "subtitle"=> "A touch of timeless elegance",
                 "description"=> "As you step into your home, you’re transported to centuries of grandeur with every corner designed to narrate a tale of classical elegance. Ornate moldings, rich wood finishes, gilded mirrors, antiques, and marble mantels adorn your space, exuding timeless beauty and enduring charm. Each element radiates the charming appeal of a tradition home while elevating its ambiance.",
+                "is_featured"=>true,
                 'created_at' => now(), // Set created_at to current timestamp
                 'updated_at' => now(), // Optionally set updated_at to current timestamp
             ]
