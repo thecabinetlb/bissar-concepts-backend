@@ -1,4 +1,7 @@
 <?php
+
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -116,6 +119,6 @@ class CollaborationProjectSeeder extends Seeder
             ],
         ];
 
-        DB::table('collaboration-projects')->insert($projects);
+        DB::table('collaboration_projects')->insert($projects);
     }
 }
