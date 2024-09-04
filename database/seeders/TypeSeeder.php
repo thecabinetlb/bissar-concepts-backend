@@ -14,10 +14,8 @@ class TypeSeeder extends Seeder
     public function run(): void
     {
         $types = [
-            ['title' => 'Design','slug' => 'design'],
-            ['title' => 'Houses','slug' => 'houses'],
-            ['title' => 'Interior','slug' => 'interior'],
-            ['title' => 'Living','slug' => 'living']
+            ['title' => 'Portfolio', 'slug' => 'portfolio'],
+            ['title' => 'Collaborations', 'slug' => 'collaborations'],
         ];
         // Insert categories into the database
         foreach ($types as $type) {
