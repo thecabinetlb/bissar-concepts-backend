@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use Database\Seeders\CollaborationProjectSeeder as SeedersCollaborationProjectSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +22,7 @@ class DatabaseSeeder extends Seeder
             PortfolioPageBannerSeeder::class,
             CollaborationPageBannerSeeder::class,
             SectionStylesSeeder::class,
+            EditorialCarouselSectionSeeder::class,
         ]);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -73,44 +73,16 @@ class CollaborationProjectResource extends Resource
             ->name('Thumbnail Image')
             ->image()
             ->preserveFilenames()
-            ->imageEditor()
-            ->afterStateUpdated(function ($set, $state) {
-                if (is_string($state) && file_exists($state)) {
-                    // Generate a unique filename with a .webp extension
-                    $filename = time() . '.webp';
-        
-                    // Convert the uploaded image to WebP and save it
-                    CollaborationProject::make($state)
-                        ->encode('webp')
-                        ->save(public_path('storage/images/projects/collaborations/thumbnails' . $filename));
-        
-                    // Set the path to the converted image
-                    $set('image', 'images/projects/collaborations/thumbnails' . $filename);
-                }
-            })        
+            ->imageEditor()     
             ->maxSize(3072)  
-            ->directory('images/projects/collaborations/thumbnails')            
+            ->directory('added_images/projects/collaborations/thumbnails')            
             ->required()
             ->columnSpanFull(),
             FileUpload::make('banner')
             ->name('Banner Image')
             ->image()
             ->preserveFilenames()
-            ->imageEditor()
-            ->afterStateUpdated(function ($set, $state) {
-                if (is_string($state) && file_exists($state)) {
-                    // Generate a unique filename with a .webp extension
-                    $filename = time() . '.webp';
-        
-                    // Convert the uploaded image to WebP and save it
-                    CollaborationProject::make($state)
-                        ->encode('webp')
-                        ->save(public_path('storage/images/projects/collaborations/banners' . $filename));
-        
-                    // Set the path to the converted image
-                    $set('image', 'images/projects/collaborations/banners' . $filename);
-                }
-            })        
+            ->imageEditor()  
             ->maxSize(3072)            
             ->required()
             ->columnSpanFull(),
@@ -119,23 +91,9 @@ class CollaborationProjectResource extends Resource
             ->image()->preserveFilenames()
             ->multiple()
             ->reorderable()
-            ->imageEditor()
-            ->afterStateUpdated(function ($set, $state) {
-                if (is_string($state) && file_exists($state)) {
-                    // Generate a unique filename with a .webp extension
-                    $filename = time() . '.webp';
-        
-                    // Convert the uploaded image to WebP and save it
-                    CollaborationProject::make($state)
-                        ->encode('webp')
-                        ->save(public_path('storage/images/projects/collaborations/images' . $filename));
-        
-                    // Set the path to the converted image
-                    $set('image', 'images/projects/collaborations/images' . $filename);
-                }
-            })        
+            ->imageEditor()      
             ->maxSize(3072)
-            ->directory('images/projects/collaborations/images')            
+            ->directory('added_images/projects/collaborations/images')            
             ->required()
             ->columnSpanFull(),
         ])->columnSpan(1)->columns(1)
@@ -148,7 +106,7 @@ class CollaborationProjectResource extends Resource
         return $table
             ->columns([
             ImageColumn::make('thumbnail')
-            ->defaultImageUrl(url('images/bissar_concepts.webp'))->grow(false),            
+            ->defaultImageUrl(url('added_images/bissar_concepts.webp'))->grow(false),            
             TextColumn::make('title')->sortable()->searchable(),
             TextColumn::make('category')
             ->badge()

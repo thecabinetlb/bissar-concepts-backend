@@ -17,4 +17,8 @@ class EditorialCarouselSection extends Model
     protected $casts = [
         'images' => 'array'
     ];
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', true);
+    }
 }

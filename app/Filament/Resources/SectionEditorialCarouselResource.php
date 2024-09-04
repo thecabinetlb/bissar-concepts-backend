@@ -6,9 +6,16 @@ use App\Filament\Resources\SectionEditorialCarouselResource\Pages;
 use App\Filament\Resources\SectionEditorialCarouselResource\RelationManagers;
 use App\Models\EditorialCarouselSection;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -25,21 +32,67 @@ class SectionEditorialCarouselResource extends Resource
     {
         return $form
             ->schema([
-                //
-            ]);
+            Section::make('Editorial Carousel Images')
+            ->description('Add your Editorial page title, carousel images and description here.')
+            ->schema([
+                TextInput::make('title')
+                ->minLength(1)->maxLength(150)
+                ->required(),
+                FileUpload::make('images')
+                ->name('Carousel Images')
+                ->image()->preserveFilenames()
+                ->multiple()
+                ->reorderable()
+                ->imageEditor() 
+                ->maxSize(3072)
+                ->directory('added_images/editorial/images')            
+                ->required(),
+                Textarea::make('description')
+                ->rows(5)
+                ->cols(20)
+                ->minLength(10)
+                ->maxLength(250),
+                Toggle::make('is_featured')
+                ->label('Set as Homepage Banner')
+                ->afterStateUpdated(function (string $state, callable $set, $get) {
+                    if ($state) {
+                        // Automatically unset other featured banners
+                        EditorialCarouselSection::where('is_featured', true)
+                            ->where('id', '!=', $get('id')) // Exclude current record
+                            ->update(['is_featured' => false]);
+                    }
+                })
+                ->required(),        
+            ])
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('title')->sortable()->searchable(),
+                TextColumn::make('is_featured')
+                ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
+                ->label('Featured?')
+                ->badge()
+                ->colors([
+                    'success' => fn($state) => $state,   // Green badge for Featured
+                    'secondary' => fn($state) => !$state, // Gray badge for Not Featured
+                ]),            
+                TextColumn::make('created_at')
+                ->dateTime('Y-M-d')
+                ->sortable()
+                ->searchable(),
+                TextColumn::make('updated_at')
+                ->dateTime('Y-M-d')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

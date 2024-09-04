@@ -34,7 +34,7 @@ class HomepageBannerResource extends Resource
         return $form
             ->schema([
             Section::make('Homepage Image')
-            ->description('Add your homepage banner image and title5 here.')
+            ->description('Add your homepage banner image title and description here.')
             ->schema([
                 TextInput::make('title')
                 ->minLength(1)->maxLength(150)
@@ -44,21 +44,7 @@ class HomepageBannerResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()                                   
-                ->directory('images/hero')
-                ->afterStateUpdated(function ( $set, $state) {
-                    if (is_string($state) && file_exists($state)) {
-                        // Generate a unique filename with a .webp extension
-                        $filename = time() . '.webp';
-            
-                        // Convert the uploaded image to WebP and save it
-                        HomepageBanner::make($state)
-                            ->encode('webp')
-                            ->save(public_path('storage/images/hero/' . $filename));
-            
-                        // Set the path to the converted image
-                        $set('image', 'images/hero/' . $filename);
-                    }
-                })                        
+                ->directory('added_images/hero')
                 ->maxSize(3072)  
                 ->columnSpanFull()          
                 ->required(),
@@ -91,7 +77,7 @@ class HomepageBannerResource extends Resource
                 ImageColumn::make('image'),            
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('is_featured')
-                ->label('Status')
+                ->label('Featured?')
                 ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
                 ->badge()
                 ->colors([

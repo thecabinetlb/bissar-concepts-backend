@@ -47,21 +47,7 @@ class SectionStylesResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()
-                ->directory('images/styles')
-                ->afterStateUpdated(function ($set, $state) {
-                    if (is_string($state) && file_exists($state)) {
-                        // Generate a unique filename with a .webp extension
-                        $filename = time() . '.webp';
-            
-                        // Convert the uploaded image to WebP and save it
-                        SectionStyles::make($state)
-                            ->encode('webp')
-                            ->save(public_path('storage/images/styles/' . $filename));
-            
-                        // Set the path to the converted image
-                        $set('image', 'images/styles/' . $filename);
-                    }
-                })
+                ->directory('added_images/styles')
                 ->maxSize(3072)  
                 ->columnSpanFull()          
                 ->required(),
@@ -99,7 +85,7 @@ class SectionStylesResource extends Resource
                 })
                 ->columnSpanFull()
                 ->required(),        
-            ])->columnSpan(1)->columns(2)
+            ])
         ]);
     }
 
@@ -110,7 +96,7 @@ class SectionStylesResource extends Resource
                 ImageColumn::make('image'),            
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('is_featured')
-                ->label('Status')
+                ->label('Featured?')
                 ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
                 ->badge()
                 ->colors([

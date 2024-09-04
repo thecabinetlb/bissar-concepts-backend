@@ -52,8 +52,10 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Private',
                 'slug' => 'the-art-collector-private-residence',
-                'type_id' => 1
-            ],
+                'type_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+             ],
             [
                 'id' => 2,
                 'title' => 'Al Rawda Reception Villa',
@@ -98,7 +100,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Private',
                 'slug' => 'al-rawda-reception-villa',
-                'type_id' => 1
+                'type_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => 3,
@@ -144,7 +148,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Private',
                 'slug' => 'al-ghadir-villa',
-                'type_id' => 1
+                'type_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => 4,
@@ -175,7 +181,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Private',
                 'slug' => 'al-rawda-private-residence',
-                'type_id' => 1
+                'type_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => 5,
@@ -208,7 +216,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Private',
                 'slug' => 'the-sisters-villa',
-                'type_id' => 1
+                'type_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => 6,
@@ -234,7 +244,9 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Private',
                 'slug' => 'jenadriah_ranch',
-                'type_id' => 1
+                'type_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
         DB::table('portfolio_projects')->insert($projects);

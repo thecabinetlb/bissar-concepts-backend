@@ -44,21 +44,7 @@ class PortfolioPageBannerResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()                   
-                ->directory('images/portfolio')
-                ->afterStateUpdated(function ($set, $state) {
-                    if (is_string($state) && file_exists($state)) {
-                        // Generate a unique filename with a .webp extension
-                        $filename = time() . '.webp';
-            
-                        // Convert the uploaded image to WebP and save it
-                        PortfolioBanner::make($state)
-                            ->encode('webp')
-                            ->save(public_path('storage/images/portfolio/' . $filename));
-            
-                        // Set the path to the converted image
-                        $set('image', 'images/portfolio/' . $filename);
-                    }
-                })                
+                ->directory('added_images/portfolio')              
                 ->maxSize(3072)  
                 ->columnSpanFull()          
                 ->required(),
@@ -92,7 +78,7 @@ class PortfolioPageBannerResource extends Resource
                 ImageColumn::make('image'),            
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('is_featured')
-                ->label('Status')
+                ->label('Featured?')
                 ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
                 ->badge()
                 ->colors([

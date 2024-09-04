@@ -78,44 +78,16 @@ class PortfolioProjectResource extends Resource
             ->name('Thumbnail Image')
             ->image()
             ->preserveFilenames()
-            ->imageEditor()
-            ->afterStateUpdated(function ($set, $state) {
-                if (is_string($state) && file_exists($state)) {
-                    // Generate a unique filename with a .webp extension
-                    $filename = time() . '.webp';
-        
-                    // Convert the uploaded image to WebP and save it
-                    PortfolioProject::make($state)
-                        ->encode('webp')
-                        ->save(public_path('storage/images/projects/portfolio/thumbnails' . $filename));
-        
-                    // Set the path to the converted image
-                    $set('image', 'images/projects/portfolio/thumbnails' . $filename);
-                }
-            })        
+            ->imageEditor()       
             ->maxSize(3072)  
-            ->directory('images/projects/portfolio/thumbnails')            
+            ->directory('added_images/projects/portfolio/thumbnails')            
             ->required()
             ->columnSpanFull(),
             FileUpload::make('banner')
             ->name('Banner Image')
             ->image()
             ->preserveFilenames()
-            ->imageEditor()
-            ->afterStateUpdated(function ($set, $state) {
-                if (is_string($state) && file_exists($state)) {
-                    // Generate a unique filename with a .webp extension
-                    $filename = time() . '.webp';
-        
-                    // Convert the uploaded image to WebP and save it
-                    PortfolioProject::make($state)
-                        ->encode('webp')
-                        ->save(public_path('storage/images/projects/portfolio/banners' . $filename));
-        
-                    // Set the path to the converted image
-                    $set('image', 'images/projects/portfolio/banners' . $filename);
-                }
-            })        
+            ->imageEditor()  
             ->maxSize(3072)            
             ->required()
             ->columnSpanFull(),
@@ -124,23 +96,9 @@ class PortfolioProjectResource extends Resource
             ->image()->preserveFilenames()
             ->multiple()
             ->reorderable()
-            ->imageEditor()
-            ->afterStateUpdated(function ($set, $state) {
-                if (is_string($state) && file_exists($state)) {
-                    // Generate a unique filename with a .webp extension
-                    $filename = time() . '.webp';
-        
-                    // Convert the uploaded image to WebP and save it
-                    PortfolioProject::make($state)
-                        ->encode('webp')
-                        ->save(public_path('storage/images/projects/portfolio/images' . $filename));
-        
-                    // Set the path to the converted image
-                    $set('image', 'images/projects/portfolio/images' . $filename);
-                }
-            })        
+            ->imageEditor() 
             ->maxSize(3072)
-            ->directory('images/projects/portfolio/images')            
+            ->directory('added_images/projects/portfolio/images')            
             ->required()
             ->columnSpanFull(),
         ])->columnSpan(1)->columns(1)
@@ -153,7 +111,7 @@ class PortfolioProjectResource extends Resource
         return $table
             ->columns([
             ImageColumn::make('thumbnail')
-            ->defaultImageUrl(url('images/bissar_concepts.webp'))->grow(false),            
+            ->defaultImageUrl(url('added_images/bissar_concepts.webp'))->grow(false),            
             TextColumn::make('title')->sortable()->searchable(),
             TextColumn::make('category')
             ->badge()
