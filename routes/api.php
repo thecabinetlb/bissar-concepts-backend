@@ -6,6 +6,7 @@ use App\Http\Controllers\API\V1\HomepageBannerController;
 use App\Http\Controllers\API\V1\PortfolioProjectController;
 use App\Http\Controllers\API\V1\SectionStylesController;
 use App\Http\Controllers\API\V1\CollaborationBannerController;
+use App\Http\Controllers\API\V1\EditorialCareouselSectionController;
 use App\Http\Controllers\API\V1\PortfolioBannerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -58,3 +59,6 @@ Route::get('collaboration-banner/featured', [CollaborationBannerController::clas
 
 Route::get('styles-section', [SectionStylesController::class, 'index']);
 Route::get('styles-section/featured', [SectionStylesController::class, 'getFeatured']);
+
+Route::get('editorial-carousel-section', [EditorialCareouselSectionController::class, 'index']);
+Route::get('editorial-carousel-section/featured', [EditorialCareouselSectionController::class, 'getFeatured']);

@@ -24,4 +24,5 @@ class CollaborationProjectController extends Controller
     {
         $projects = $type->collaborationProjects()->get();
         return response()->json($projects);    
-    }}
+    }
+}

@@ -16,4 +16,6 @@ class SectionStylesController extends Controller
     {
         $featuredStyles= SectionStyles::featured()->get();
         return response()->json($featuredStyles);
-    }}
+    }
+}
+

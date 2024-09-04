@@ -16,4 +16,5 @@ class PortfolioBannerController extends Controller
     {
         $featuredImage = PortfolioBanner::featured()->get();
         return response()->json($featuredImage);
-    }}
+    }
+}
