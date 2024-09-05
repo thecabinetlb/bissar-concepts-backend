@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SectionStylesResource\Pages;
-use App\Filament\Resources\SectionStylesResource\RelationManagers;
-use App\Models\SectionStyles;
+use App\Filament\Resources\SectionServiceResource\Pages;
+use App\Filament\Resources\SectionServiceResource\RelationManagers;
+use App\Models\SectionService;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -21,9 +21,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SectionStylesResource extends Resource
+class SectionServiceResource extends Resource
 {
-    protected static ?string $model = SectionStyles::class;
+    protected static ?string $model = SectionService::class;
+
 
     protected static ?string $navigationGroup = 'Sections';
 
@@ -39,14 +40,11 @@ class SectionStylesResource extends Resource
                 TextInput::make('title')
                 ->minLength(1)->maxLength(150)
                 ->required(),
-                TextInput::make('subtitle')
-                ->minLength(1)->maxLength(250)
-                ->required(),
                 FileUpload::make('image')
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()
-                ->directory('uploads/styles')
+                ->directory('uploads/services')
       
                 ->columnSpanFull()          
                 ->required(),
@@ -61,7 +59,7 @@ class SectionStylesResource extends Resource
                 ->label('Do you want this image to be in the styles section?')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
                     if ($state) {
-                        $featuredCount = SectionStyles::where('is_featured', true)
+                        $featuredCount = SectionService::where('is_featured', true)
                             ->where('id', '!=', $get('id')) // Exclude current record
                             ->count();
             
@@ -76,7 +74,7 @@ class SectionStylesResource extends Resource
                             $set('is_featured', false);
                         } else {
                             // Automatically unset other featured banners
-                            SectionStyles::where('is_featured', true)
+                            SectionService::where('is_featured', true)
                                 ->where('id', '!=', $get('id')) // Exclude current record
                                 ->update(['is_featured' => false]);
                         }
@@ -91,36 +89,36 @@ class SectionStylesResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                ImageColumn::make('image'),            
-                TextColumn::make('title')->sortable()->searchable(),
-                TextColumn::make('is_featured')
-                ->label('Featured?')
-                ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
-                ->badge()
-                ->colors([
-                    'success' => fn($state) => $state,   // Green badge for Featured
-                    'secondary' => fn($state) => !$state, // Gray badge for Not Featured
-                ]),            
-                TextColumn::make('created_at')
-                ->dateTime('Y-M-d')
-                ->sortable()
-                ->searchable(),
-                TextColumn::make('updated_at')
-                ->dateTime('Y-M-d')
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        ->columns([
+            ImageColumn::make('image'),            
+            TextColumn::make('title')->sortable()->searchable(),
+            TextColumn::make('is_featured')
+            ->label('Featured?')
+            ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
+            ->badge()
+            ->colors([
+                'success' => fn($state) => $state,   // Green badge for Featured
+                'secondary' => fn($state) => !$state, // Gray badge for Not Featured
+            ]),            
+            TextColumn::make('created_at')
+            ->dateTime('Y-M-d')
+            ->sortable()
+            ->searchable(),
+            TextColumn::make('updated_at')
+            ->dateTime('Y-M-d')
+        ])
+        ->filters([
+            //
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]),
+        ]);
     }
 
     public static function getRelations(): array
@@ -133,9 +131,9 @@ class SectionStylesResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSectionStyles::route('/'),
-            'create' => Pages\CreateSectionStyles::route('/create'),
-            'edit' => Pages\EditSectionStyles::route('/{record}/edit'),
+            'index' => Pages\ListSectionServices::route('/'),
+            'create' => Pages\CreateSectionService::route('/create'),
+            'edit' => Pages\EditSectionService::route('/{record}/edit'),
         ];
     }
 }

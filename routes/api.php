@@ -8,6 +8,7 @@ use App\Http\Controllers\API\V1\SectionStylesController;
 use App\Http\Controllers\API\V1\CollaborationBannerController;
 use App\Http\Controllers\API\V1\EditorialCareouselSectionController;
 use App\Http\Controllers\API\V1\PortfolioBannerController;
+use App\Http\Controllers\API\V1\SectionServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -62,3 +63,6 @@ Route::get('styles-section/featured', [SectionStylesController::class, 'getFeatu
 
 Route::get('editorial-carousel-section', [EditorialCareouselSectionController::class, 'index']);
 Route::get('editorial-carousel-section/featured', [EditorialCareouselSectionController::class, 'getFeatured']);
+
+Route::get('services-section', [SectionServiceController::class, 'index']);
+Route::get('services-section/featured', [SectionServiceController::class, 'getFeatured']);

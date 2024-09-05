@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CollaborationPageBannerSeeder::class,
             SectionStylesSeeder::class,
             EditorialCarouselSectionSeeder::class,
+            SectionServicesSeeder::class,
         ]);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

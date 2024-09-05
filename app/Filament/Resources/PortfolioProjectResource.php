@@ -114,12 +114,7 @@ class PortfolioProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->headerActions([
-            ImportAction::make()
-                ->importer(PortfolioProjectImporter::class),
-           ExportBulkAction::make()
-                ->exporter(PortfolioProjectExporter::class)
-            ])
+
             ->columns([
             ImageColumn::make('thumbnail')
             ->defaultImageUrl(url('uploads/bissar_concepts.webp'))->grow(false),            
