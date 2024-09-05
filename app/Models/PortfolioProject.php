@@ -31,4 +31,8 @@ class PortfolioProject extends Model
     {
         return $this->belongsTo(Type::class);
     }
+    public function getImageUrlAttribute()
+    {
+        return url('storage/' . $this->attributes['banner']);
+    }
 }

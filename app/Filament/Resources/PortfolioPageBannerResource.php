@@ -44,8 +44,8 @@ class PortfolioPageBannerResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()                   
-                ->directory('added_images/portfolio')              
-                ->maxSize(3072)  
+                ->directory('uploads/portfolio')              
+      
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

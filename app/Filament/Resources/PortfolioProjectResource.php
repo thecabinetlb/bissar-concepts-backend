@@ -79,8 +79,8 @@ class PortfolioProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()       
-            ->maxSize(3072)  
-            ->directory('added_images/projects/portfolio/thumbnails')            
+  
+            ->directory('uploads/projects/portfolio/thumbnails')            
             ->required()
             ->columnSpanFull(),
             FileUpload::make('banner')
@@ -88,17 +88,18 @@ class PortfolioProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()  
-            ->maxSize(3072)            
+            ->directory('uploads/projects/collaborations/banners')            
             ->required()
             ->columnSpanFull(),
             FileUpload::make('images')
             ->name('Carousel Images')
-            ->image()->preserveFilenames()
+            ->image()
+            ->preserveFilenames()
             ->multiple()
             ->reorderable()
             ->imageEditor() 
-            ->maxSize(3072)
-            ->directory('added_images/projects/portfolio/images')            
+
+            ->directory('uploads/projects/portfolio/images')            
             ->required()
             ->columnSpanFull(),
         ])->columnSpan(1)->columns(1)
@@ -111,7 +112,7 @@ class PortfolioProjectResource extends Resource
         return $table
             ->columns([
             ImageColumn::make('thumbnail')
-            ->defaultImageUrl(url('added_images/bissar_concepts.webp'))->grow(false),            
+            ->defaultImageUrl(url('uploads/bissar_concepts.webp'))->grow(false),            
             TextColumn::make('title')->sortable()->searchable(),
             TextColumn::make('category')
             ->badge()

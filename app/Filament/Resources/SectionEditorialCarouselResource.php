@@ -44,8 +44,8 @@ class SectionEditorialCarouselResource extends Resource
                 ->multiple()
                 ->reorderable()
                 ->imageEditor() 
-                ->maxSize(3072)
-                ->directory('added_images/editorial/images')            
+    
+                ->directory('uploads/editorial/images')            
                 ->required(),
                 Textarea::make('description')
                 ->rows(5)

@@ -47,8 +47,8 @@ class SectionStylesResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()
-                ->directory('added_images/styles')
-                ->maxSize(3072)  
+                ->directory('uploads/styles')
+      
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

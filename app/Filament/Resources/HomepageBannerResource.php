@@ -44,8 +44,8 @@ class HomepageBannerResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()                                   
-                ->directory('added_images/hero')
-                ->maxSize(3072)  
+                ->directory('uploads/hero')
+      
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

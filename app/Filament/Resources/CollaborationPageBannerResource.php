@@ -44,8 +44,8 @@ class CollaborationPageBannerResource extends Resource
                 ->image()
                 ->preserveFilenames()
                 ->imageEditor()
-                ->directory('added_images/collaboration')
-                ->maxSize(3072)  
+                ->directory('uploads/collaboration')
+      
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')
