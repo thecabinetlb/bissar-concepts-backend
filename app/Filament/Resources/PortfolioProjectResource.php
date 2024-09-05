@@ -2,10 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\PortfolioProjectExporter;
+use App\Filament\Imports\PortfolioProjectImporter;
 use App\Filament\Resources\PortfolioProjectResource\Pages;
 use App\Filament\Resources\PortfolioProjectResource\RelationManagers;
 use App\Models\PortfolioProject;
 use Carbon\Carbon;
+use Filament\Tables\Actions\ImportAction;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
@@ -110,6 +114,12 @@ class PortfolioProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->headerActions([
+            ImportAction::make()
+                ->importer(PortfolioProjectImporter::class),
+           ExportBulkAction::make()
+                ->exporter(PortfolioProjectExporter::class)
+            ])
             ->columns([
             ImageColumn::make('thumbnail')
             ->defaultImageUrl(url('uploads/bissar_concepts.webp'))->grow(false),            

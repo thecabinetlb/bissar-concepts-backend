@@ -18,7 +18,7 @@ class HomepageBannerSeeder extends Seeder
                 'id'=>1,
                 'title' => 'Home of Luxury',
                 'description' => '"Luxury is when it seems flawless, when you reach the right balance between all elements. Understated theatricality – that is what my luxury is all about."Jean-Louis Deniot',
-                'image' => url('/images_v1/hero/Option_1.jpg'),
+                'image' => asset('/images_v1/hero/Option_1.jpg'),
                 'is_featured'=> true,
                 'created_at' => now(),
                 'updated_at' => now(),

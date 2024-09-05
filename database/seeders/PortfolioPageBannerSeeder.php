@@ -18,7 +18,7 @@ class PortfolioPageBannerSeeder extends Seeder
                 'id'=>1,
                 'title' => 'Your sanctuary. Your vision.',
                 'description' => 'We design your dream house to your vision and design palette, ultimately creating a space that reflects your character.',
-                'image' => url('/images_v1/innerhero/100.jpg'),
+                'image' => asset('/images_v1/innerhero/100.jpg'),
                 'is_featured'=> true,
                 'created_at' => now(),
                 'updated_at' => now(),
