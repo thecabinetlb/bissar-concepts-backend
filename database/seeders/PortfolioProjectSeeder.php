@@ -29,7 +29,7 @@ class PortfolioProjectSeeder extends Seeder
                     asset('/images_v1/projects/portfolio/the_collector_private_residence/images/002.jpg'),
                     asset('/images_v1/projects/portfolio/the_collector_private_residence/images/003.jpg'),
                     asset('/images_v1/projects/portfolio/the_collector_private_residence/images/004.jpg'),
-                    asset('/images_v1/projects/portfolio/the_collector_private_residence/images/010 (1).jpg'),
+                    asset('/images_v1/projects/portfolio/the_collector_private_residence/images/010(1).jpg'),
                     asset('/images_v1/projects/portfolio/the_collector_private_residence/images/010 (2).jpg'),
                     asset('/images_v1/projects/portfolio/the_collector_private_residence/images/021.jpg'),
                     asset('/images_v1/projects/portfolio/the_collector_private_residence/images/022.jpg'),

@@ -16,7 +16,7 @@ class SectionServicesSeeder extends Seeder
         $data = [
             [
                 "title"=> "Custom Designs",
-                "image"=> asset('/images_v1/skills/023 Corridor (12).jpg'),
+                "image"=> asset('/images_v1/skills/023Corridor(12).jpg'),
                 "description"=> "Our services uplift your home with a touch of luxury and sophistication.",
                 "is_featured"=>true,
                 'created_at' => now(), // Set created_at to current timestamp
@@ -24,7 +24,7 @@ class SectionServicesSeeder extends Seeder
             ],
             [
                 "title"=> "Exquisite Furniture",
-                "image"=> asset('/images_v1/skills/Option 2.jpg'),
+                "image"=> asset('/images_v1/skills/Option_2.jpg'),
                 "description"=> "From the world to your home, our curated furniture selection elevates your space.",
                 "is_featured"=>true,
                 'created_at' => now(), // Set created_at to current timestamp
@@ -32,7 +32,7 @@ class SectionServicesSeeder extends Seeder
             ],
             [
                 "title"=> "Luxury Fit-Out",
-                "image"=> asset('/images_v1/skills/Option 1.jpg'),
+                "image"=> asset('/images_v1/skills/Option_1.jpg'),
                 "description"=> "Adding the last touches to your home with an eye for detail and high-end finishing.",
                 "is_featured"=>true,
                 'created_at' => now(), // Set created_at to current timestamp
