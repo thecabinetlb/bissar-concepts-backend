@@ -35,7 +35,7 @@ class SectionServiceResource extends Resource
         return $form
             ->schema([
             Section::make('Styles Section Item')
-            ->description('Add your new style and feature it in your homepage.')
+            ->description('Add your new service and feature it in your homepage.')
             ->schema([
                 TextInput::make('title')
                 ->minLength(1)->maxLength(150)
@@ -56,7 +56,7 @@ class SectionServiceResource extends Resource
                 ->columnSpanFull()          
                 ->required(),
                 Toggle::make('is_featured')
-                ->label('Do you want this image to be in the styles section?')
+                ->label('Do you want this be in the services section?')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
                     if ($state) {
                         $featuredCount = SectionService::where('is_featured', true)

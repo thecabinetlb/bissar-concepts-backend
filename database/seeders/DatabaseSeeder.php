@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             SectionStylesSeeder::class,
             EditorialCarouselSectionSeeder::class,
             SectionServicesSeeder::class,
+            SectionBehindTheBrandAccordionSeeder::class,
+            SectionBehindTheBrandImageSeeder::class,
         ]);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

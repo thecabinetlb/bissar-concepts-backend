@@ -2,66 +2,51 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SectionEditorialCarouselResource\Pages;
-use App\Filament\Resources\SectionEditorialCarouselResource\RelationManagers;
-use App\Models\EditorialCarouselSection;
+use App\Filament\Resources\SectionBehindTheBrandAccordionResource\Pages;
+use App\Filament\Resources\SectionBehindTheBrandAccordionResource\RelationManagers;
+use App\Models\SectionBehindTheBrandAccordion;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SectionEditorialCarouselResource extends Resource
+class SectionBehindTheBrandAccordionResource extends Resource
 {
-    protected static ?string $model = EditorialCarouselSection::class;
+    protected static ?string $model = SectionBehindTheBrandAccordion::class;
 
     protected static ?string $navigationGroup = 'Sections';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-            Section::make('Editorial Carousel Images')
-            ->description('Add your editorial page title, carousel images and description here.')
+            Section::make('Behind the brand Section Item')
+            ->description('Add a new accordion topic and feature it in the behind the brand section.')
             ->schema([
                 TextInput::make('title')
                 ->minLength(1)->maxLength(150)
-                ->required(),
-                FileUpload::make('images')
-                ->name('Carousel Images')
-                ->image()->preserveFilenames()
-                ->multiple()
-                ->reorderable()
-                ->imageEditor() 
-    
-                ->directory('uploads/editorial/images')            
                 ->required(),
                 Textarea::make('description')
                 ->rows(5)
                 ->cols(20)
                 ->minLength(10)
-                ->maxLength(250),
+                ->maxLength(500)
+                ->columnSpanFull()          
+                ->required(),
                 Toggle::make('is_featured')
-                ->label('Do you want this to be in the editorial carousel section?')
-                ->afterStateUpdated(function (string $state, callable $set, $get) {
-                    if ($state) {
-                        // Automatically unset other featured banners
-                        EditorialCarouselSection::where('is_featured', true)
-                            ->where('id', '!=', $get('id')) // Exclude current record
-                            ->update(['is_featured' => false]);
-                    }
-                })
+                ->label('Do you want to feature this in the behind the brand accordion section?')
+                ->columnSpanFull()
                 ->required(),        
             ])
         ]);
@@ -73,8 +58,8 @@ class SectionEditorialCarouselResource extends Resource
             ->columns([
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('is_featured')
-                ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
                 ->label('Featured?')
+                ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
                 ->badge()
                 ->colors([
                     'success' => fn($state) => $state,   // Green badge for Featured
@@ -111,9 +96,9 @@ class SectionEditorialCarouselResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSectionEditorialCarousels::route('/'),
-            'create' => Pages\CreateSectionEditorialCarousel::route('/create'),
-            'edit' => Pages\EditSectionEditorialCarousel::route('/{record}/edit'),
+            'index' => Pages\ListSectionBehindTheBrandAccordions::route('/'),
+            'create' => Pages\CreateSectionBehindTheBrandAccordion::route('/create'),
+            'edit' => Pages\EditSectionBehindTheBrandAccordion::route('/{record}/edit'),
         ];
     }
 }

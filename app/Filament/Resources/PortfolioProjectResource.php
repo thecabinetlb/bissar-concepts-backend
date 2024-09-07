@@ -83,7 +83,6 @@ class PortfolioProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()       
-  
             ->directory('uploads/projects/portfolio/thumbnails')            
             ->required()
             ->columnSpanFull(),
@@ -102,7 +101,6 @@ class PortfolioProjectResource extends Resource
             ->multiple()
             ->reorderable()
             ->imageEditor() 
-
             ->directory('uploads/projects/portfolio/images')            
             ->required()
             ->columnSpanFull(),

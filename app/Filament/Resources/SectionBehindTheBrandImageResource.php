@@ -2,13 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SectionEditorialCarouselResource\Pages;
-use App\Filament\Resources\SectionEditorialCarouselResource\RelationManagers;
-use App\Models\EditorialCarouselSection;
+use App\Filament\Resources\SectionBehindTheBrandImageResource\Pages;
+use App\Filament\Resources\SectionBehindTheBrandImageResource\RelationManagers;
+use App\Models\SectionBehindTheBrandImage;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -20,50 +19,46 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SectionEditorialCarouselResource extends Resource
+class SectionBehindTheBrandImageResource extends Resource
 {
-    protected static ?string $model = EditorialCarouselSection::class;
+    protected static ?string $model = SectionBehindTheBrandImage::class;
 
     protected static ?string $navigationGroup = 'Sections';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-            Section::make('Editorial Carousel Images')
-            ->description('Add your editorial page title, carousel images and description here.')
+            Section::make('Editorial Accordion Section Image')
+            ->description('Add your editorial accordion section image and title here.')
             ->schema([
                 TextInput::make('title')
                 ->minLength(1)->maxLength(150)
                 ->required(),
-                FileUpload::make('images')
-                ->name('Carousel Images')
-                ->image()->preserveFilenames()
-                ->multiple()
-                ->reorderable()
-                ->imageEditor() 
-    
-                ->directory('uploads/editorial/images')            
+                FileUpload::make('image')
+                ->name('Section Image')
+                ->image()
+                ->preserveFilenames()
+                ->imageEditor()                                   
+                ->directory('uploads/editorial')
+      
+                ->columnSpanFull()          
                 ->required(),
-                Textarea::make('description')
-                ->rows(5)
-                ->cols(20)
-                ->minLength(10)
-                ->maxLength(250),
                 Toggle::make('is_featured')
-                ->label('Do you want this to be in the editorial carousel section?')
+                ->label('Set as Homepage Banner')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
                     if ($state) {
                         // Automatically unset other featured banners
-                        EditorialCarouselSection::where('is_featured', true)
+                        SectionBehindTheBrandImage::where('is_featured', true)
                             ->where('id', '!=', $get('id')) // Exclude current record
                             ->update(['is_featured' => false]);
                     }
                 })
+                ->columnSpanFull()          
                 ->required(),        
-            ])
+            ])->columnSpan(1)->columns(2)
         ]);
     }
 
@@ -71,10 +66,11 @@ class SectionEditorialCarouselResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('image'),            
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('is_featured')
-                ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
                 ->label('Featured?')
+                ->formatStateUsing(fn($state) => $state ? 'Featured' : 'Not Featured')
                 ->badge()
                 ->colors([
                     'success' => fn($state) => $state,   // Green badge for Featured
@@ -111,9 +107,9 @@ class SectionEditorialCarouselResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSectionEditorialCarousels::route('/'),
-            'create' => Pages\CreateSectionEditorialCarousel::route('/create'),
-            'edit' => Pages\EditSectionEditorialCarousel::route('/{record}/edit'),
+            'index' => Pages\ListSectionBehindTheBrandImages::route('/'),
+            'create' => Pages\CreateSectionBehindTheBrandImage::route('/create'),
+            'edit' => Pages\EditSectionBehindTheBrandImage::route('/{record}/edit'),
         ];
     }
 }

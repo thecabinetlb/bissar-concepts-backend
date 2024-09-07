@@ -58,7 +58,7 @@ class SectionStylesResource extends Resource
                 ->columnSpanFull()          
                 ->required(),
                 Toggle::make('is_featured')
-                ->label('Do you want this image to be in the styles section?')
+                ->label('Do you want this to be in the styles section?')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
                     if ($state) {
                         $featuredCount = SectionStyles::where('is_featured', true)
