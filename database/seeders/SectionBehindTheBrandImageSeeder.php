@@ -17,7 +17,7 @@ class SectionBehindTheBrandImageSeeder extends Seeder
             [
                 'id'=>1,
                 'title' => 'Brand the Brand',
-                'image' => asset('/images_v1/editorial//60-Square.jpg.jpg'),
+                'image' => asset('/images/editorial/editorial.jpg'),
                 'is_featured'=> true,
                 'created_at' => now(),
                 'updated_at' => now(),

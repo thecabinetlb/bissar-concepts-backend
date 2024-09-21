@@ -61,8 +61,7 @@ class CollaborationProjectResource extends Resource
             TextInput::make('year')->required(),              
             TextInput::make('client')->minLength(1)->maxLength(150)->required(),
             TagsInput::make('architects')
-            ->placeholder(' ')
-            ->default(['Zaher Bissar']),
+            ->placeholder(' '),
         ])->columnSpan(1)->columns(2)
         ->collapsible(),
 
