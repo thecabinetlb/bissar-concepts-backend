@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('category');
-            $table->json('architects');
+            $table->json('architects')->nullable();
             $table->year('year');           
             $table->string('location');
             $table->text('description')->nullable();

@@ -166,8 +166,10 @@ class PortfolioProjectSeeder extends Seeder
                 ]),
                 'client' => 'Private',
                 'slug' => 'al-rawda-private-residence',
-                'category' => 'Portfolio',
-            ],
+                'type_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),             
+             ],
             [
                 'id' => 5,
                 'title' => 'The Sisters Villa',
