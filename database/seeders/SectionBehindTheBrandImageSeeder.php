@@ -16,7 +16,7 @@ class SectionBehindTheBrandImageSeeder extends Seeder
         $images = [
             [
                 'id'=>1,
-                'title' => 'Brand the Brand',
+                'title' => 'Behind the Brand',
                 'image' => asset('/images/editorial/editorial.jpg'),
                 'is_featured'=> true,
                 'created_at' => now(),
