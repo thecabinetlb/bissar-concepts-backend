@@ -30,7 +30,7 @@ class SectionStylesResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 1; // Order this resource as the first item in the group
+        return 2; // Order this resource as the first item in the group
     }
     public static function form(Form $form): Form
     {

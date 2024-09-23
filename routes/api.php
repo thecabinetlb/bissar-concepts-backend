@@ -8,6 +8,7 @@ use App\Http\Controllers\API\V1\SectionStylesController;
 use App\Http\Controllers\API\V1\CollaborationBannerController;
 use App\Http\Controllers\API\V1\EditorialCareouselSectionController;
 use App\Http\Controllers\API\V1\PortfolioBannerController;
+use App\Http\Controllers\API\V1\SectionAboutController;
 use App\Http\Controllers\API\V1\SectionBehindTheBrandAccordionController;
 use App\Http\Controllers\API\V1\SectionBehindTheBrandImageController;
 use App\Http\Controllers\API\V1\SectionServiceController;
@@ -74,3 +75,6 @@ Route::get('accordion-section/featured', [SectionBehindTheBrandAccordionControll
 
 Route::get('accordion-section-image', [SectionBehindTheBrandImageController::class, 'index']);
 Route::get('accordion-section-image/featured', [SectionBehindTheBrandImageController::class, 'getFeatured']);
+
+Route::get('about-section', [SectionAboutController::class, 'index']);
+Route::get('about-section/featured', [SectionAboutController::class, 'getFeatured']);

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SectionServiceResource\Pages;
-use App\Filament\Resources\SectionServiceResource\RelationManagers;
-use App\Models\SectionService;
+use App\Filament\Resources\SectionAboutResource\Pages;
+use App\Filament\Resources\SectionAboutResource\RelationManagers;
+use App\Models\SectionAbout;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -12,7 +12,6 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
@@ -21,33 +20,35 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SectionServiceResource extends Resource
+class SectionAboutResource extends Resource
 {
-    protected static ?string $model = SectionService::class;
+    protected static ?string $model = SectionAbout::class;
+
 
     protected static ?string $navigationGroup = 'Sections';
-    protected static ?string $navigationLabel = 'Services Section';
+
+    protected static ?string $navigationLabel = 'About Section';
 
     public static function getNavigationSort(): ?int
     {
-        return 3; // Order this resource as the first item in the group
+        return 1; // Order this resource as the first item in the group
     }
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-            Section::make('Styles Section Item')
-            ->description('Add your new service and feature it in your homepage.')
+            Section::make('About Sevtion Image')
+            ->description('Add your portrait, title and description here.')
             ->schema([
                 TextInput::make('title')
                 ->minLength(1)->maxLength(150)
                 ->required(),
                 FileUpload::make('image')
+                ->name('Portrait')
                 ->image()
                 ->preserveFilenames()
-                ->imageEditor()
-                ->directory('uploads/services')
+                ->imageEditor()                                   
+                ->directory('uploads/about')
       
                 ->columnSpanFull()          
                 ->required(),
@@ -55,37 +56,21 @@ class SectionServiceResource extends Resource
                 ->rows(5)
                 ->cols(20)
                 ->minLength(10)
-                ->maxLength(500)
-                ->columnSpanFull()          
-                ->required(),
+                ->maxLength(250)
+                ->columnSpanFull(),
                 Toggle::make('is_featured')
-                ->label('Do you want this be in the services section?')
+                ->label('Set as About Section')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
                     if ($state) {
-                        $featuredCount = SectionService::where('is_featured', true)
+                        // Automatically unset other featured banners
+                        SectionAbout::where('is_featured', true)
                             ->where('id', '!=', $get('id')) // Exclude current record
-                            ->count();
-            
-                        if ($featuredCount >= 3) {
-                            // If there are already 3 featured items, prevent adding more
-                            Notification::make()
-                                ->title('Only 3 items can be featured at a time.')
-                                ->danger()
-                                ->send();
-            
-                            // Revert the toggle state
-                            $set('is_featured', false);
-                        } else {
-                            // Automatically unset other featured banners
-                            SectionService::where('is_featured', true)
-                                ->where('id', '!=', $get('id')) // Exclude current record
-                                ->update(['is_featured' => false]);
-                        }
+                            ->update(['is_featured' => false]);
                     }
                 })
-                ->columnSpanFull()
+                ->columnSpanFull()          
                 ->required(),        
-            ])
+            ])->columnSpan(1)->columns(2)
         ]);
     }
 
@@ -110,18 +95,17 @@ class SectionServiceResource extends Resource
             TextColumn::make('updated_at')
             ->dateTime('Y-M-d')
         ])
-        ->filters([
-            //
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ]);
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
     }
 
     public static function getRelations(): array
@@ -134,9 +118,9 @@ class SectionServiceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSectionServices::route('/'),
-            'create' => Pages\CreateSectionService::route('/create'),
-            'edit' => Pages\EditSectionService::route('/{record}/edit'),
+            'index' => Pages\ListSectionAbouts::route('/'),
+            'create' => Pages\CreateSectionAbout::route('/create'),
+            'edit' => Pages\EditSectionAbout::route('/{record}/edit'),
         ];
     }
 }

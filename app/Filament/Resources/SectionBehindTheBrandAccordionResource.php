@@ -29,7 +29,7 @@ class SectionBehindTheBrandAccordionResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 5; // Order this resource as the first item in the group
+        return 6; // Order this resource as the first item in the group
     }
     public static function form(Form $form): Form
     {

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             SectionServicesSeeder::class,
             SectionBehindTheBrandAccordionSeeder::class,
             SectionBehindTheBrandImageSeeder::class,
+            SectionAboutSeeder::class,
         ]);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
