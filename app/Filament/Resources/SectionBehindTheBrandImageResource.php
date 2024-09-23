@@ -24,9 +24,12 @@ class SectionBehindTheBrandImageResource extends Resource
     protected static ?string $model = SectionBehindTheBrandImage::class;
 
     protected static ?string $navigationGroup = 'Sections';
+    protected static ?string $navigationLabel = 'Behind the Brand Accordion';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    public static function getNavigationSort(): ?int
+    {
+        return 4; // Order this resource as the first item in the group
+    }
     public static function form(Form $form): Form
     {
         return $form

@@ -27,7 +27,10 @@ class CollaborationPageBannerResource extends Resource
 
     protected static ?string $navigationGroup = 'Banners';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    public static function getNavigationSort(): ?int
+    {
+        return 3; // Order this resource as the first item in the group
+    }
 
     public static function form(Form $form): Form
     {

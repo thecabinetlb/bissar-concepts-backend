@@ -27,9 +27,11 @@ class PortfolioPageBannerResource extends Resource
 
     protected static ?string $navigationGroup = 'Banners';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    public static function form(Form $form): Form
+    public static function getNavigationSort(): ?int
+    {
+        return 2; // Order this resource as the first item in the group
+    }
+        public static function form(Form $form): Form
     {
         return $form
             ->schema([

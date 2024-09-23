@@ -34,9 +34,7 @@ class PortfolioProjectResource extends Resource
     protected static ?string $model = PortfolioProject::class;
 
     protected static ?string $navigationGroup = 'Projects';
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+     
     public static function form(Form $form): Form
     {
         return $form
