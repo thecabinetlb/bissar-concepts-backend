@@ -27,6 +27,11 @@ class ContactResource extends Resource
         return false;
     } 
     
+    public static function getTableQuery()
+    {
+        return parent::getTableQuery()->orderBy('created_at', 'desc');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -51,7 +56,9 @@ class ContactResource extends Resource
                 Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
-                //
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

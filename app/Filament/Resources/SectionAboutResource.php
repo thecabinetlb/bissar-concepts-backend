@@ -33,6 +33,12 @@ class SectionAboutResource extends Resource
     {
         return 1; // Order this resource as the first item in the group
     }
+        
+    public static function getTableQuery()
+    {
+        return parent::getTableQuery()->orderBy('created_at', 'desc');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

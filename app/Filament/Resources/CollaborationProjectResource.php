@@ -33,7 +33,7 @@ class CollaborationProjectResource extends Resource
     {
         return 1; // Order this resource as the first item in the group
     }
-    
+
     public static function form(Form $form): Form
     {
         return $form

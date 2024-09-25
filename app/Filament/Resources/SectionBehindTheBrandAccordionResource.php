@@ -26,11 +26,16 @@ class SectionBehindTheBrandAccordionResource extends Resource
     protected static ?string $navigationGroup = 'Sections';
     protected static ?string $navigationLabel = 'Behind the Brand Image';
 
-
     public static function getNavigationSort(): ?int
     {
         return 6; // Order this resource as the first item in the group
     }
+    
+    public static function getTableQuery()
+    {
+        return parent::getTableQuery()->orderBy('created_at', 'desc');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
