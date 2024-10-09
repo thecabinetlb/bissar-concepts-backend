@@ -60,7 +60,7 @@ class SectionEditorialCarouselResource extends Resource
                 ->rows(5)
                 ->cols(20)
                 ->minLength(10)
-                ->maxLength(250),
+                ->maxLength(500),
                 Toggle::make('is_featured')
                 ->label('Do you want this to be in the editorial carousel section?')
                 ->afterStateUpdated(function (string $state, callable $set, $get) {
