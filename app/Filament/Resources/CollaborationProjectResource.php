@@ -76,8 +76,8 @@ class CollaborationProjectResource extends Resource
             ->image()
             ->preserveFilenames()
             ->imageEditor()     
-  
             ->directory('uploads/projects/collaborations/thumbnails')            
+            ->disk('public')
             ->required()
             ->columnSpanFull(),
             FileUpload::make('banner')
@@ -86,6 +86,7 @@ class CollaborationProjectResource extends Resource
             ->preserveFilenames()
             ->imageEditor()  
             ->directory('uploads/projects/collaborations/banners')            
+            ->disk('public')
             ->required()
             ->columnSpanFull(),
             FileUpload::make('images')
@@ -96,6 +97,7 @@ class CollaborationProjectResource extends Resource
             ->reorderable()
             ->imageEditor()      
             ->directory('uploads/projects/collaborations/images')            
+            ->disk('public')
             ->required()
             ->columnSpanFull(),
         ])->columnSpan(1)->columns(1)

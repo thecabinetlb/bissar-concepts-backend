@@ -52,7 +52,7 @@ class SectionBehindTheBrandImageResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()                                   
                 ->directory('uploads/editorial')
-      
+                ->disk('public')
                 ->columnSpanFull()          
                 ->required(),
                 Toggle::make('is_featured')

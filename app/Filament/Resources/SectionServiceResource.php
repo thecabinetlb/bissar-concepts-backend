@@ -53,7 +53,7 @@ class SectionServiceResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()
                 ->directory('uploads/services')
-      
+                ->disk('public')
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

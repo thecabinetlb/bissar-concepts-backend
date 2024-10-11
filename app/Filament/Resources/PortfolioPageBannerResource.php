@@ -53,7 +53,7 @@ class PortfolioPageBannerResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()                   
                 ->directory('uploads/portfolio')              
-      
+                ->disk('public')
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

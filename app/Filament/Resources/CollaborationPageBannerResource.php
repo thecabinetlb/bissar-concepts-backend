@@ -53,7 +53,7 @@ class CollaborationPageBannerResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()
                 ->directory('uploads/collaboration')
-      
+                ->disk('public')
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

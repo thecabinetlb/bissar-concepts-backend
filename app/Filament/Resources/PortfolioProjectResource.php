@@ -82,6 +82,7 @@ class PortfolioProjectResource extends Resource
             ->preserveFilenames()
             ->imageEditor()       
             ->directory('uploads/projects/portfolio/thumbnails')            
+            ->disk('public')
             ->required()
             ->columnSpanFull(),
             FileUpload::make('banner')
@@ -90,6 +91,7 @@ class PortfolioProjectResource extends Resource
             ->preserveFilenames()
             ->imageEditor()  
             ->directory('uploads/projects/collaborations/banners')            
+            ->disk('public')
             ->required()
             ->columnSpanFull(),
             FileUpload::make('images')
@@ -100,6 +102,7 @@ class PortfolioProjectResource extends Resource
             ->reorderable()
             ->imageEditor() 
             ->directory('uploads/projects/portfolio/images')            
+            ->disk('public')
             ->required()
             ->columnSpanFull(),
         ])->columnSpan(1)->columns(1)

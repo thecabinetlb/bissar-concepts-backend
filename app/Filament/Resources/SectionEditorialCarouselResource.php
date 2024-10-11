@@ -53,7 +53,7 @@ class SectionEditorialCarouselResource extends Resource
                 ->multiple()
                 ->reorderable()
                 ->imageEditor() 
-    
+                ->disk('public')
                 ->directory('uploads/editorial/images')            
                 ->required(),
                 Textarea::make('description')

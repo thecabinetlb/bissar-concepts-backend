@@ -56,7 +56,7 @@ class SectionStylesResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()
                 ->directory('uploads/styles')
-      
+                ->disk('public')
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')

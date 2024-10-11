@@ -55,7 +55,7 @@ class SectionAboutResource extends Resource
                 ->preserveFilenames()
                 ->imageEditor()                                   
                 ->directory('uploads/about')
-      
+                ->disk('public')
                 ->columnSpanFull()          
                 ->required(),
                 Textarea::make('description')
